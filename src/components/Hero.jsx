@@ -43,7 +43,7 @@ function HeroPhoto() {
           width: '100%', height: '100%',
           objectFit: 'cover',
           objectPosition: 'center 22%',
-          filter: 'saturate(0.80) brightness(0.60)',
+          filter: 'saturate(0.75) brightness(0.48)',
           display: 'block',
         }}
       />
@@ -158,20 +158,21 @@ export default function Hero() {
             <span style={{ color:'var(--accent-cyan)' }}>Opanuj wodę.</span>
           </motion.h1>
 
-          {/* Subheadline — 1 linia */}
+          {/* Subheadline */}
           <motion.p
             initial={{ opacity:0, y:14 }} animate={{ opacity:1, y:0 }}
             transition={{ duration:0.65, delay:0.52 }}
             style={{
               color: 'var(--text-muted)',
               fontSize: 'clamp(15px,1.25vw,17px)',
-              lineHeight: 1.5,
+              lineHeight: 1.6,
               marginBottom: 44,
               fontWeight: 400,
-              letterSpacing: '-0,04em',
             }}
           >
-            Certyfikowani instruktorzy IKO · Jastarnia & Tenerife · Pierwsza lekcja gratis
+            Certyfikowani instruktorzy IKO · Jastarnia & Tenerife
+            <br />
+            Pierwsza lekcja gratis
           </motion.p>
 
           {/* CTAs */}

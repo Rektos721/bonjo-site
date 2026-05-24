@@ -32,6 +32,9 @@ body {
   section { scroll-margin-top: 72px; }
 }
 
+/* Prevent orphaned single words on line breaks */
+p, li, figcaption { text-wrap: pretty; }
+
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }

@@ -1,75 +1,37 @@
 import { motion } from 'framer-motion'
 
-/* Four distinct cloud shapes rendered via SVG feGaussianBlur.
-   Blur is contained inside the SVG filter region → zero gray halo on page. */
-function CloudShape({ w, h, op, uid, s }) {
-  const a = op.toFixed(2)
-  const b = (op * .82).toFixed(2)
-  const c = (op * .64).toFixed(2)
-  const d = (op * .46).toFixed(2)
-  const blk = { display: 'block', overflow: 'visible' }
+/**
+ * Cloud shapes — overlapping circles composited as a GROUP, then one shared
+ * feGaussianBlur to blend intersections. Result: cohesive cloud silhouette,
+ * not separate blobs. stdDeviation just smooths circle joints (3-7px), NOT
+ * the whole cloud, so no gray halo.
+ *
+ * vb = viewBox string (fixed coordinate space for circle positions)
+ * c  = [[cx, cy, r], ...] — circle definitions
+ * sd = feGaussianBlur stdDeviation
+ */
+const SHAPES = [
+  { // 0: classic medium cumulus — wide base, two domes
+    vb: '0 0 280 112', sd: 5,
+    c: [[140,90,64],[78,90,48],[200,90,48],[106,61,46],[170,55,50],[140,39,35]],
+  },
+  { // 1: wide flat cirrus — horizontal streak, low profile
+    vb: '0 0 400 78', sd: 7,
+    c: [[200,58,47],[100,60,39],[300,59,41],[40,62,31],[360,59,31],[155,44,33],[245,41,31]],
+  },
+  { // 2: small compact puffy — three round bumps
+    vb: '0 0 190 97', sd: 4,
+    c: [[95,74,47],[52,75,37],[140,74,37],[74,47,39],[118,43,41],[96,31,29]],
+  },
+  { // 3: large dramatic cumulus — tall, many domes
+    vb: '0 0 420 138', sd: 7,
+    c: [[210,108,76],[114,108,61],[310,108,58],[52,108,44],[370,108,41],
+        [155,71,56],[260,65,60],[200,49,46],[300,82,40]],
+  },
+]
 
-  // s=0  classic cumulus — wide base, 4 stacked lobes
-  if (s === 0) return (
-    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={blk}>
-      <defs>
-        <filter id={uid} x="-50%" y="-90%" width="200%" height="280%">
-          <feGaussianBlur stdDeviation="13 9" />
-        </filter>
-      </defs>
-      <ellipse cx={w*.47} cy={h*.70} rx={w*.44} ry={h*.28} fill={`rgba(255,255,255,${a})`} filter={`url(#${uid})`}/>
-      <ellipse cx={w*.26} cy={h*.32} rx={w*.24} ry={h*.30} fill={`rgba(255,255,255,${b})`} filter={`url(#${uid})`}/>
-      <ellipse cx={w*.60} cy={h*.26} rx={w*.20} ry={h*.26} fill={`rgba(255,255,255,${c})`} filter={`url(#${uid})`}/>
-      <ellipse cx={w*.76} cy={h*.46} rx={w*.16} ry={h*.18} fill={`rgba(255,255,255,${d})`} filter={`url(#${uid})`}/>
-    </svg>
-  )
-
-  // s=1  wispy cirrus — very flat horizontal streak
-  if (s === 1) return (
-    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={blk}>
-      <defs>
-        <filter id={uid} x="-40%" y="-120%" width="180%" height="340%">
-          <feGaussianBlur stdDeviation="22 7" />
-        </filter>
-      </defs>
-      <ellipse cx={w*.50} cy={h*.62} rx={w*.48} ry={h*.22} fill={`rgba(255,255,255,${a})`} filter={`url(#${uid})`}/>
-      <ellipse cx={w*.26} cy={h*.40} rx={w*.18} ry={h*.16} fill={`rgba(255,255,255,${c})`} filter={`url(#${uid})`}/>
-      <ellipse cx={w*.76} cy={h*.38} rx={w*.15} ry={h*.14} fill={`rgba(255,255,255,${d})`} filter={`url(#${uid})`}/>
-    </svg>
-  )
-
-  // s=2  small puffy — compact round trio
-  if (s === 2) return (
-    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={blk}>
-      <defs>
-        <filter id={uid} x="-50%" y="-80%" width="200%" height="260%">
-          <feGaussianBlur stdDeviation="9 9" />
-        </filter>
-      </defs>
-      <ellipse cx={w*.50} cy={h*.65} rx={w*.42} ry={h*.28} fill={`rgba(255,255,255,${a})`} filter={`url(#${uid})`}/>
-      <ellipse cx={w*.28} cy={h*.35} rx={w*.20} ry={h*.28} fill={`rgba(255,255,255,${b})`} filter={`url(#${uid})`}/>
-      <ellipse cx={w*.54} cy={h*.28} rx={w*.18} ry={h*.26} fill={`rgba(255,255,255,${b})`} filter={`url(#${uid})`}/>
-      <ellipse cx={w*.76} cy={h*.45} rx={w*.14} ry={h*.20} fill={`rgba(255,255,255,${c})`} filter={`url(#${uid})`}/>
-    </svg>
-  )
-
-  // s=3  large stormy base — very wide, ultra-soft
-  return (
-    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={blk}>
-      <defs>
-        <filter id={uid} x="-40%" y="-80%" width="180%" height="260%">
-          <feGaussianBlur stdDeviation="26 15" />
-        </filter>
-      </defs>
-      <ellipse cx={w*.50} cy={h*.68} rx={w*.48} ry={h*.28} fill={`rgba(255,255,255,${a})`} filter={`url(#${uid})`}/>
-      <ellipse cx={w*.30} cy={h*.36} rx={w*.24} ry={h*.30} fill={`rgba(255,255,255,${b})`} filter={`url(#${uid})`}/>
-      <ellipse cx={w*.64} cy={h*.30} rx={w*.20} ry={h*.26} fill={`rgba(255,255,255,${c})`} filter={`url(#${uid})`}/>
-    </svg>
-  )
-}
-
-/* Single animated cloud. dx/dy = travel in px (mirror ping-pong). */
 function Cloud({ id, top, left, w, h, op, s, dx, dy, dur }) {
+  const { vb, c, sd } = SHAPES[s]
   return (
     <motion.div
       aria-hidden="true"
@@ -77,42 +39,70 @@ function Cloud({ id, top, left, w, h, op, s, dx, dy, dur }) {
       animate={{ x: dx, y: dy }}
       transition={{ duration: dur, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }}
     >
-      <CloudShape w={w} h={h} op={op} uid={`g${id}`} s={s} />
+      <svg viewBox={vb} width={w} height={h} style={{ display: 'block', overflow: 'visible' }}>
+        <defs>
+          {/* Filter on group — all circles blur together into one shape */}
+          <filter id={`cf${id}`} x="-20%" y="-50%" width="140%" height="200%">
+            <feGaussianBlur stdDeviation={sd} />
+          </filter>
+        </defs>
+        <g filter={`url(#cf${id})`}>
+          {c.map(([cx, cy, r], i) => (
+            <circle key={i} cx={cx} cy={cy} r={r} fill={`rgba(255,255,255,${op})`} />
+          ))}
+        </g>
+      </svg>
     </motion.div>
   )
 }
 
-/* Fixed overlay across entire viewport. mix-blend-mode:screen punches through
-   section solid backgrounds — additive on dark, invisible on light. */
+/**
+ * Absolute-positioned (not fixed) — clouds are part of the page, not the
+ * viewport. They scroll naturally with content at the same speed as the page.
+ * mix-blend-mode:screen makes them additive on dark backgrounds, invisible
+ * on light ones, without covering any UI.
+ *
+ * Spread: 0–620vh → covers ~6 full screens of content at typical viewport.
+ * dx/dy = mirror ping-pong travel in px via Framer Motion.
+ */
 export default function GlobalClouds() {
   return (
     <div
       aria-hidden="true"
       style={{
-        position: 'fixed', inset: 0,
-        zIndex: 2, pointerEvents: 'none',
+        position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+        zIndex: 1, pointerEvents: 'none',
         mixBlendMode: 'screen',
       }}
     >
-      {/* top viewport band 0-15vh */}
-      <Cloud id={0}  top="1vh"  left="-2vw" w={600} h={145} op={0.28} s={0} dx={130}  dy={-13} dur={20} />
-      <Cloud id={1}  top="4vh"  left="50vw" w={440} h={110} op={0.24} s={1} dx={-105} dy={9}   dur={25} />
-      <Cloud id={2}  top="11vh" left="68vw" w={360} h={92}  op={0.22} s={2} dx={90}   dy={-9}  dur={17} />
+      {/* ─── screen 1: Hero + TrustBar (0–70vh) ─── */}
+      <Cloud id={0}  top="2vh"   left="-3vw" w={310} h={122} op={0.30} s={0} dx={125}  dy={-13} dur={20} />
+      <Cloud id={1}  top="10vh"  left="52vw" w={270} h={104} op={0.26} s={1} dx={-100} dy={9}   dur={27} />
+      <Cloud id={2}  top="38vh"  left="14vw" w={200} h={90}  op={0.24} s={2} dx={90}   dy={-10} dur={18} />
+      <Cloud id={3}  top="55vh"  left="65vw" w={295} h={118} op={0.27} s={3} dx={-115} dy={11}  dur={25} />
 
-      {/* mid-upper band 18-35vh */}
-      <Cloud id={3}  top="18vh" left="6vw"  w={500} h={125} op={0.26} s={3} dx={-125} dy={11}  dur={27} />
-      <Cloud id={4}  top="22vh" left="44vw" w={380} h={96}  op={0.22} s={0} dx={100}  dy={-10} dur={21} />
-      <Cloud id={5}  top="28vh" left="76vw" w={320} h={82}  op={0.20} s={1} dx={-85}  dy={8}   dur={19} />
+      {/* ─── screen 2: HowItWorks + About (80–175vh) ─── */}
+      <Cloud id={4}  top="88vh"  left="4vw"  w={330} h={130} op={0.26} s={1} dx={110}  dy={-10} dur={22} />
+      <Cloud id={5}  top="115vh" left="44vw" w={240} h={96}  op={0.24} s={2} dx={-90}  dy={10}  dur={20} />
+      <Cloud id={6}  top="155vh" left="72vw" w={280} h={112} op={0.25} s={0} dx={100}  dy={-11} dur={23} />
 
-      {/* mid-lower band 40-58vh */}
-      <Cloud id={6}  top="40vh" left="-1vw" w={540} h={134} op={0.24} s={1} dx={115}  dy={-11} dur={23} />
-      <Cloud id={7}  top="44vh" left="38vw" w={400} h={100} op={0.22} s={2} dx={-95}  dy={10}  dur={22} />
-      <Cloud id={8}  top="50vh" left="70vw" w={460} h={115} op={0.23} s={3} dx={110}  dy={-9}  dur={26} />
+      {/* ─── screen 3: Instructors + Locations (185–280vh) ─── */}
+      <Cloud id={7}  top="195vh" left="8vw"  w={315} h={124} op={0.26} s={3} dx={-120} dy={9}   dur={26} />
+      <Cloud id={8}  top="238vh" left="38vw" w={255} h={102} op={0.24} s={0} dx={95}   dy={-12} dur={19} />
+      <Cloud id={9}  top="268vh" left="68vw" w={220} h={88}  op={0.23} s={1} dx={-85}  dy={8}   dur={21} />
 
-      {/* lower band 62-80vh */}
-      <Cloud id={9}  top="63vh" left="10vw" w={480} h={120} op={0.22} s={0} dx={-120} dy={8}   dur={20} />
-      <Cloud id={10} top="67vh" left="55vw" w={350} h={88}  op={0.20} s={2} dx={95}   dy={-12} dur={24} />
-      <Cloud id={11} top="78vh" left="24vw" w={420} h={105} op={0.21} s={1} dx={-100} dy={9}   dur={22} />
+      {/* ─── screen 4: Courses + Gallery (290–390vh) ─── */}
+      <Cloud id={10} top="300vh" left="-1vw" w={345} h={134} op={0.26} s={2} dx={130}  dy={-10} dur={24} />
+      <Cloud id={11} top="345vh" left="48vw" w={285} h={114} op={0.25} s={3} dx={-105} dy={11}  dur={22} />
+
+      {/* ─── screen 5: Reviews + Pricing (400–490vh) ─── */}
+      <Cloud id={12} top="405vh" left="18vw" w={300} h={120} op={0.25} s={0} dx={110}  dy={-11} dur={20} />
+      <Cloud id={13} top="455vh" left="60vw" w={260} h={104} op={0.24} s={2} dx={-95}  dy={9}   dur={18} />
+
+      {/* ─── screen 6: FAQ + CTA + Contact + Footer (510–620vh) ─── */}
+      <Cloud id={14} top="515vh" left="5vw"  w={325} h={128} op={0.26} s={1} dx={115}  dy={-12} dur={25} />
+      <Cloud id={15} top="580vh" left="42vw" w={295} h={118} op={0.25} s={3} dx={-110} dy={10}  dur={23} />
+      <Cloud id={16} top="620vh" left="74vw" w={240} h={96}  op={0.23} s={0} dx={95}   dy={-9}  dur={21} />
     </div>
   )
 }
