@@ -25,13 +25,13 @@ const SELECT_OPTIONS = [
   'Inne pytanie',
 ]
 
-/* Inline styles for light form card */
+/* ── Ciemny styl inputów — pasuje do dark ocean theme ── */
 const inp = {
   width: '100%',
-  background: 'rgba(10,30,70,0.06)',
-  border: '1px solid rgba(10,40,90,0.15)',
+  background: 'rgba(255,255,255,0.06)',
+  border: '1px solid rgba(0,216,255,0.16)',
   borderRadius: '8px',
-  color: '#0a1e3c',
+  color: 'var(--text-primary)',
   padding: '13px 16px',
   fontFamily: "'DM Sans', sans-serif",
   fontSize: '0.92rem',
@@ -39,12 +39,13 @@ const inp = {
   transition: 'border-color 0.25s, background 0.25s',
   appearance: 'none',
 }
+
 const lbl = {
   display: 'block',
   fontFamily: "'DM Mono', monospace",
   fontSize: '0.66rem',
   letterSpacing: '0.16em',
-  color: '#527a9a',
+  color: 'var(--text-muted)',
   marginBottom: '7px',
   textTransform: 'uppercase',
 }
@@ -60,7 +61,7 @@ export default function Contact() {
 
   const focusStyle = key => ({
     ...inp,
-    ...(focused === key ? { borderColor:'#00a8d4', background:'rgba(0,168,212,0.06)' } : {}),
+    ...(focused === key ? { borderColor:'var(--accent-cyan)', background:'rgba(0,216,255,0.07)' } : {}),
   })
 
   const handleSubmit = e => { e.preventDefault(); setSent(true); setTimeout(() => setSent(false), 5000) }
@@ -143,34 +144,41 @@ export default function Contact() {
             </motion.div>
           </div>
 
-          {/* ── Right: white form card ── */}
+          {/* ── Right: dark glass form card ── */}
           <motion.div variants={fadeUp} style={{
-            borderRadius:24,
-            background:'rgba(255,255,255,0.97)',
-            boxShadow:'0 32px 80px rgba(0,10,50,0.35), 0 0 0 1px rgba(255,255,255,0.9)',
-            padding:'40px 36px',
-            position:'relative', overflow:'hidden',
+            borderRadius: 24,
+            background: 'rgba(6,18,52,0.82)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            boxShadow: '0 32px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(0,216,255,0.13)',
+            padding: '40px 36px',
+            position: 'relative', overflow: 'hidden',
           }}>
-            {/* Cyan accent strip at top */}
+            {/* Cyan accent strip */}
             <div style={{ position:'absolute', top:0, left:0, right:0, height:3,
-              background:'linear-gradient(90deg, #00d8ff, #0088cc)' }}/>
+              background:'linear-gradient(90deg, #00d8ff, #0066aa)' }}/>
+
+            {/* Subtle inner glow */}
+            <div style={{ position:'absolute', top:0, left:'50%', transform:'translateX(-50%)',
+              width:300, height:120, pointerEvents:'none',
+              background:'radial-gradient(ellipse at top, rgba(0,216,255,0.08) 0%, transparent 70%)' }}/>
 
             {sent ? (
               <div style={{ textAlign:'center', padding:'52px 0' }}>
                 <div style={{ fontSize:'3.5rem', marginBottom:16 }}>🪁</div>
-                <h3 className="display" style={{ fontWeight:800, fontSize:'2rem', color:'#00a8cc', marginBottom:10 }}>
+                <h3 className="display" style={{ fontWeight:800, fontSize:'2rem', color:'var(--accent-cyan)', marginBottom:10 }}>
                   Gotowe!
                 </h3>
-                <p style={{ color:'#527a9a', lineHeight:1.7, fontSize:'0.95rem' }}>
+                <p style={{ color:'var(--text-muted)', lineHeight:1.7, fontSize:'0.95rem' }}>
                   Odpiszemy w ciągu 24 godzin.<br />Do zobaczenia na spocie!
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
-                <h3 className="display" style={{ fontWeight:800, fontSize:'1.55rem', color:'#0a1e3c', marginBottom:6 }}>
+                <h3 className="display" style={{ fontWeight:800, fontSize:'1.55rem', color:'var(--text-primary)', marginBottom:6 }}>
                   Napisz do nas
                 </h3>
-                <p style={{ color:'#7a9ab8', fontSize:'0.84rem', marginBottom:26 }}>
+                <p style={{ color:'var(--text-muted)', fontSize:'0.84rem', marginBottom:26 }}>
                   Pierwsza lekcja intro — gratis, bez zobowiązań.
                 </p>
 
@@ -178,12 +186,14 @@ export default function Contact() {
                   <div>
                     <label style={lbl}>Imię i nazwisko</label>
                     <input type="text" placeholder="Jan Kowalski" required
+                      className="contact-inp"
                       style={focusStyle('name')}
                       onFocus={()=>setFocused('name')} onBlur={()=>setFocused(null)}/>
                   </div>
                   <div>
                     <label style={lbl}>Telefon / WhatsApp</label>
                     <input type="tel" placeholder="+48 600 000 000"
+                      className="contact-inp"
                       style={focusStyle('phone')}
                       onFocus={()=>setFocused('phone')} onBlur={()=>setFocused(null)}/>
                   </div>
@@ -192,13 +202,15 @@ export default function Contact() {
                 <div style={{ marginBottom:16 }}>
                   <label style={lbl}>Email</label>
                   <input type="email" placeholder="twoj@email.com" required
+                    className="contact-inp"
                     style={focusStyle('email')}
                     onFocus={()=>setFocused('email')} onBlur={()=>setFocused(null)}/>
                 </div>
 
                 <div style={{ marginBottom:16 }}>
                   <label style={lbl}>Interesuje mnie</label>
-                  <select style={focusStyle('service')}
+                  <select className="contact-inp"
+                    style={focusStyle('service')}
                     onFocus={()=>setFocused('service')} onBlur={()=>setFocused(null)}>
                     <option value="">Wybierz opcję...</option>
                     {SELECT_OPTIONS.map(o=><option key={o} value={o}>{o}</option>)}
@@ -207,7 +219,8 @@ export default function Contact() {
 
                 <div style={{ marginBottom:16 }}>
                   <label style={lbl}>Lokalizacja</label>
-                  <select style={focusStyle('loc')}
+                  <select className="contact-inp"
+                    style={focusStyle('loc')}
                     onFocus={()=>setFocused('loc')} onBlur={()=>setFocused(null)}>
                     <option value="">Gdzie chcesz się uczyć?</option>
                     <option>Jastarnia (sezon letni)</option>
@@ -219,6 +232,7 @@ export default function Contact() {
                 <div style={{ marginBottom:24 }}>
                   <label style={lbl}>Wiadomość</label>
                   <textarea rows={3} placeholder="Twój poziom, preferowane terminy, pytania..."
+                    className="contact-inp"
                     style={{ ...focusStyle('msg'), resize:'none' }}
                     onFocus={()=>setFocused('msg')} onBlur={()=>setFocused(null)}/>
                 </div>
@@ -227,11 +241,17 @@ export default function Contact() {
                   style={{ width:'100%', fontSize:'0.95rem', padding:'15px', textAlign:'center' }}>
                   Wyślij wiadomość →
                 </button>
-                <p style={{ textAlign:'center', fontSize:'0.7rem', color:'#9ab8cc', marginTop:12 }}>
+                <p style={{ textAlign:'center', fontSize:'0.7rem', color:'rgba(140,180,210,0.45)', marginTop:12 }}>
                   Możesz też napisać przez WhatsApp — odpiszemy jeszcze szybciej.
                 </p>
               </form>
             )}
+
+            {/* Placeholder + option styling dla dark inputs */}
+            <style>{`
+              .contact-inp::placeholder { color: rgba(150,192,220,0.40); }
+              .contact-inp option { background: #071530; color: rgba(210,235,250,0.92); }
+            `}</style>
           </motion.div>
         </motion.div>
       </div>

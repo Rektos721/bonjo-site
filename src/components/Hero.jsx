@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-/* ── Kitesurfer SVG — realistic posture, dark wetsuit ─── */
+/* ── Kitesurfer SVG ─── */
 function KitesurferSVG() {
   return (
     <motion.div
@@ -10,79 +10,121 @@ function KitesurferSVG() {
       style={{
         position: 'absolute', right: '3%', bottom: '0px',
         zIndex: 2, pointerEvents: 'none',
-        filter: 'blur(0.9px) drop-shadow(0 0 45px rgba(0,200,255,0.55)) drop-shadow(0 10px 32px rgba(0,15,60,0.92))',
+        filter: [
+          'blur(0.4px)',
+          'drop-shadow(0 0 64px rgba(0,200,255,0.72))',
+          'drop-shadow(0 14px 44px rgba(0,10,50,0.96))',
+          'drop-shadow(0 0 22px rgba(26,107,160,0.55))',
+        ].join(' '),
       }}
     >
       <motion.svg
-        width="360" height="522" viewBox="0 0 200 290" fill="none"
+        width="400" height="580" viewBox="0 0 200 290" fill="none"
         animate={{ y: [0, -7, 0], rotate: [-0.6, 0.9, -0.6] }}
         transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
       >
-        {/* ══ KITE — bow/C-kite ══ */}
-        <ellipse cx="155" cy="42" rx="52" ry="44" fill="rgba(0,140,220,0.06)" />
+        {/* ══ KITE ══ */}
+        <ellipse cx="155" cy="42" rx="52" ry="44" fill="rgba(0,140,220,0.07)" />
         <path d="M118,52 Q136,7 155,8 Q174,7 192,52 Q182,74 155,76 Q128,74 118,52Z"
-          fill="#0085c8" opacity="0.90"/>
-        <path d="M118,52 Q128,16 142,13 Q137,62 120,68Z" fill="rgba(0,15,90,0.42)"/>
-        <path d="M192,52 Q182,16 168,13 Q173,62 190,68Z" fill="rgba(0,15,90,0.42)"/>
-        {/* Leading edge tube */}
+          fill="#0085c8" opacity="0.92"/>
+        <path d="M118,52 Q128,16 142,13 Q137,62 120,68Z" fill="rgba(0,15,90,0.44)"/>
+        <path d="M192,52 Q182,16 168,13 Q173,62 190,68Z" fill="rgba(0,15,90,0.44)"/>
+        {/* Leading edge */}
         <path d="M118,52 Q136,7 155,8 Q174,7 192,52"
-          stroke="#70e5ff" strokeWidth="8" strokeLinecap="round" fill="none" opacity="0.90"/>
+          stroke="#70e5ff" strokeWidth="8.5" strokeLinecap="round" fill="none" opacity="0.92"/>
         <path d="M128,38 Q155,12 182,38"
-          stroke="rgba(210,250,255,0.32)" strokeWidth="2" fill="none" strokeLinecap="round"/>
+          stroke="rgba(210,250,255,0.35)" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
         {/* Struts */}
-        <line x1="142" y1="13" x2="137" y2="72" stroke="rgba(255,255,255,0.15)" strokeWidth="1.1"/>
-        <line x1="155" y1="8"  x2="155" y2="76" stroke="rgba(255,255,255,0.15)" strokeWidth="1.1"/>
-        <line x1="168" y1="13" x2="173" y2="72" stroke="rgba(255,255,255,0.15)" strokeWidth="1.1"/>
+        <line x1="142" y1="13" x2="137" y2="72" stroke="rgba(255,255,255,0.18)" strokeWidth="1.1"/>
+        <line x1="155" y1="8"  x2="155" y2="76" stroke="rgba(255,255,255,0.18)" strokeWidth="1.1"/>
+        <line x1="168" y1="13" x2="173" y2="72" stroke="rgba(255,255,255,0.18)" strokeWidth="1.1"/>
         <path d="M118,52 Q130,74 155,76 Q180,74 192,52"
-          stroke="rgba(0,150,210,0.28)" strokeWidth="1.5" fill="none"/>
+          stroke="rgba(0,150,210,0.30)" strokeWidth="1.5" fill="none"/>
+
         {/* ══ CONTROL LINES ══ */}
-        <line x1="128" y1="70" x2="72" y2="172" stroke="rgba(110,205,235,0.48)" strokeWidth="1.2"/>
-        <line x1="182" y1="70" x2="108" y2="172" stroke="rgba(110,205,235,0.48)" strokeWidth="1.2"/>
+        <line x1="128" y1="70" x2="72" y2="172" stroke="rgba(110,210,240,0.55)" strokeWidth="1.4"/>
+        <line x1="182" y1="70" x2="108" y2="172" stroke="rgba(110,210,240,0.55)" strokeWidth="1.4"/>
+
         {/* ══ CONTROL BAR ══ */}
-        <rect x="65" y="169" width="50" height="5.5" rx="2.75" fill="#3a7090"/>
-        <circle cx="65"  cy="171.5" r="3.5" fill="#2a5a70"/>
-        <circle cx="115" cy="171.5" r="3.5" fill="#2a5a70"/>
-        <line x1="90" y1="175" x2="90" y2="182" stroke="#3a7090" strokeWidth="2.5" strokeLinecap="round"/>
-        {/* ══ HEAD — helmet + goggles ══ */}
-        <circle cx="24" cy="121" r="15" fill="#0d2238"/>
+        <rect x="65" y="169" width="50" height="5.5" rx="2.75" fill="#235f80"/>
+        <circle cx="65"  cy="171.5" r="3.5" fill="#194a60"/>
+        <circle cx="115" cy="171.5" r="3.5" fill="#194a60"/>
+        <line x1="90" y1="175" x2="90" y2="182" stroke="#235f80" strokeWidth="2.5" strokeLinecap="round"/>
+
+        {/* ══ HEAD ══ */}
+        <circle cx="24" cy="121" r="15" fill="#0c2448"/>
         <ellipse cx="27" cy="126" rx="11.5" ry="11" fill="#c8895a"/>
-        <path d="M12,118 Q22,110 38,115" stroke="#0d2238" strokeWidth="5" fill="none" strokeLinecap="round"/>
-        <rect x="16" y="120" width="23" height="8.5" rx="4.25" fill="rgba(4,10,38,0.88)"/>
-        <ellipse cx="21.5" cy="124" rx="5" ry="4" fill="rgba(0,155,220,0.22)"/>
-        <ellipse cx="33.5" cy="124" rx="5" ry="4" fill="rgba(0,155,220,0.22)"/>
-        <path d="M17,121 Q20,119 24,121" stroke="rgba(200,242,255,0.55)" strokeWidth="1" fill="none"/>
-        <path d="M16,126 Q22,136 27,138 Q34,136 38,128" stroke="#0d2238" strokeWidth="1.8" fill="none" opacity="0.6"/>
-        {/* ══ TORSO — dark wetsuit + bright harness ══ */}
-        <path d="M40,137 Q66,155 100,183" stroke="#0d2240" strokeWidth="15" strokeLinecap="round"/>
-        <path d="M42,141 Q66,157 98,183" stroke="#0094cc" strokeWidth="3.5" strokeLinecap="round" opacity="0.75"/>
-        <path d="M46,143 Q62,152 82,163" stroke="#122840" strokeWidth="11" strokeLinecap="round"/>
-        <path d="M50,158 Q72,168 96,180" stroke="#ff6b35" strokeWidth="7" strokeLinecap="round" opacity="0.90"/>
-        <path d="M52,158 Q74,168 97,180" stroke="rgba(255,170,80,0.55)" strokeWidth="2.5" strokeLinecap="round"/>
-        <circle cx="74" cy="164" r="4" fill="#cc4a10" opacity="0.85"/>
-        <circle cx="74" cy="164" r="2" fill="rgba(255,200,100,0.7)"/>
+        <path d="M12,118 Q22,110 38,115" stroke="#0c2448" strokeWidth="5.5" fill="none" strokeLinecap="round"/>
+        {/* Goggles */}
+        <rect x="16" y="120" width="23" height="8.5" rx="4.25" fill="rgba(4,10,40,0.90)"/>
+        <ellipse cx="21.5" cy="124" rx="5" ry="4" fill="rgba(0,155,220,0.28)"/>
+        <ellipse cx="33.5" cy="124" rx="5" ry="4" fill="rgba(0,155,220,0.28)"/>
+        <path d="M17,121 Q20,119 24,121" stroke="rgba(200,242,255,0.65)" strokeWidth="1.1" fill="none"/>
+        <path d="M16,126 Q22,136 27,138 Q34,136 38,128" stroke="#0c2448" strokeWidth="1.8" fill="none" opacity="0.6"/>
+
+        {/* ══ TORSO — ocean-blue wetsuit ══ */}
+        {/* Drop shadow layer */}
+        <path d="M40,137 Q66,155 100,183" stroke="rgba(0,20,60,0.70)" strokeWidth="19" strokeLinecap="round"/>
+        {/* Main body — medium ocean blue */}
+        <path d="M40,137 Q66,155 100,183" stroke="#1a6ba0" strokeWidth="14" strokeLinecap="round"/>
+        {/* Highlight sheen */}
+        <path d="M43,140 Q65,156 96,182" stroke="#2e90c6" strokeWidth="5" strokeLinecap="round" opacity="0.55"/>
+        {/* Chest panel */}
+        <path d="M46,143 Q62,152 82,163" stroke="#15558a" strokeWidth="11" strokeLinecap="round"/>
+        <path d="M49,145 Q62,153 80,163" stroke="#2282ba" strokeWidth="4" strokeLinecap="round" opacity="0.45"/>
+
+        {/* ── Harness — orange ── */}
+        <path d="M50,158 Q72,168 96,180" stroke="#ff6b35" strokeWidth="7.5" strokeLinecap="round" opacity="0.93"/>
+        <path d="M52,158 Q74,168 97,180" stroke="rgba(255,170,80,0.60)" strokeWidth="2.8" strokeLinecap="round"/>
+        <circle cx="74" cy="164" r="4.2" fill="#cc4a10" opacity="0.90"/>
+        <circle cx="74" cy="164" r="2.1" fill="rgba(255,205,100,0.80)"/>
+
         {/* ══ ARMS ══ */}
-        <path d="M42,141 Q56,152 72,172" stroke="#0d2240" strokeWidth="5.5" strokeLinecap="round"/>
-        <path d="M50,148 Q82,163 116,172" stroke="#0d2240" strokeWidth="5" strokeLinecap="round"/>
-        <ellipse cx="72"  cy="173" rx="5" ry="4" fill="#091824"/>
-        <ellipse cx="116" cy="172" rx="5" ry="4" fill="#091824"/>
-        {/* ══ LEGS — bent stance ══ */}
-        <path d="M99,184 Q113,210 125,233" stroke="#0d2240" strokeWidth="7" strokeLinecap="round"/>
-        <path d="M107,189 Q122,217 148,236" stroke="#0d2240" strokeWidth="6.5" strokeLinecap="round"/>
-        <ellipse cx="125" cy="234" rx="9" ry="4.5" fill="#060e1a" transform="rotate(-4,125,234)"/>
-        <ellipse cx="149" cy="237" rx="9.5" ry="4" fill="#060e1a" transform="rotate(-4,149,237)"/>
-        {/* ══ BOARD — white kiteboard ══ */}
-        <ellipse cx="140" cy="246" rx="44" ry="5.5" fill="rgba(0,0,0,0.22)"/>
+        <path d="M42,141 Q56,152 72,172" stroke="rgba(0,20,60,0.60)" strokeWidth="8" strokeLinecap="round"/>
+        <path d="M50,148 Q82,163 116,172" stroke="rgba(0,20,60,0.60)" strokeWidth="7.5" strokeLinecap="round"/>
+        <path d="M42,141 Q56,152 72,172" stroke="#1a6ba0" strokeWidth="5.5" strokeLinecap="round"/>
+        <path d="M50,148 Q82,163 116,172" stroke="#1a6ba0" strokeWidth="5" strokeLinecap="round"/>
+        <ellipse cx="72"  cy="173" rx="5.5" ry="4.2" fill="#07192e"/>
+        <ellipse cx="116" cy="172" rx="5.5" ry="4.2" fill="#07192e"/>
+
+        {/* ══ LEGS ══ */}
+        <path d="M99,184 Q113,210 125,233" stroke="rgba(0,20,60,0.60)" strokeWidth="10" strokeLinecap="round"/>
+        <path d="M107,189 Q122,217 148,236" stroke="rgba(0,20,60,0.60)" strokeWidth="9.5" strokeLinecap="round"/>
+        <path d="M99,184 Q113,210 125,233" stroke="#1a6ba0" strokeWidth="7" strokeLinecap="round"/>
+        <path d="M107,189 Q122,217 148,236" stroke="#1a6ba0" strokeWidth="6.5" strokeLinecap="round"/>
+        <ellipse cx="125" cy="234" rx="9.5" ry="4.8" fill="#050e1e" transform="rotate(-4,125,234)"/>
+        <ellipse cx="149" cy="237" rx="10" ry="4.2" fill="#050e1e" transform="rotate(-4,149,237)"/>
+
+        {/* ══ BOARD ══ */}
+        <ellipse cx="140" cy="247" rx="50" ry="6.5" fill="rgba(0,0,0,0.28)"/>
         <path d="M97,239 Q100,232 118,231 Q140,230 162,231 Q180,232 183,239 Q180,246 162,247 Q140,248 118,247 Q100,246 97,239Z"
-          fill="#cde8f8" opacity="0.96"/>
+          fill="#cde8f8" opacity="0.97"/>
         <path d="M101,238 Q106,233 120,232 Q140,231 160,232 Q176,233 179,238 Q176,244 160,245 Q140,246 120,245 Q106,244 101,238Z"
-          fill="#eaf5ff" opacity="0.60"/>
-        <line x1="118" y1="233" x2="162" y2="233" stroke="#00b0e0" strokeWidth="2" opacity="0.55"/>
-        <rect x="117" y="232" width="15" height="9" rx="3" fill="rgba(0,70,150,0.45)"/>
-        <rect x="148" y="231" width="15" height="9" rx="3" fill="rgba(0,70,150,0.45)"/>
-        <path d="M117,231 Q124,229 132,231" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5" fill="none"/>
-        <path d="M148,231 Q155,229 163,231" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5" fill="none"/>
-        <path d="M106,241 L100,258 L114,241Z" fill="rgba(0,130,200,0.55)"/>
-        <path d="M175,239 L181,256 L168,239Z" fill="rgba(0,130,200,0.50)"/>
+          fill="#eaf5ff" opacity="0.68"/>
+        <line x1="118" y1="233" x2="162" y2="233" stroke="#00b8e8" strokeWidth="2.2" opacity="0.65"/>
+        <rect x="117" y="232" width="15" height="9" rx="3" fill="rgba(0,70,155,0.50)"/>
+        <rect x="148" y="231" width="15" height="9" rx="3" fill="rgba(0,70,155,0.50)"/>
+        <path d="M117,231 Q124,229 132,231" stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" fill="none"/>
+        <path d="M148,231 Q155,229 163,231" stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" fill="none"/>
+        <path d="M106,241 L100,259 L114,241Z" fill="rgba(0,130,200,0.62)"/>
+        <path d="M175,239 L181,257 L168,239Z" fill="rgba(0,130,200,0.58)"/>
+
+        {/* ══ WATER SPRAY & WAKE ══ */}
+        {/* Wake foam arc */}
+        <path d="M88,250 C112,262 168,262 192,250"
+          stroke="rgba(0,210,255,0.20)" strokeWidth="3" fill="none" strokeLinecap="round"/>
+        {/* Left spray arc */}
+        <path d="M94,253 Q98,244 107,255"
+          stroke="rgba(180,235,255,0.62)" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+        {/* Right spray arc */}
+        <path d="M170,251 Q176,242 182,253"
+          stroke="rgba(180,235,255,0.62)" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+        {/* Spray droplets */}
+        <circle cx="87"  cy="261" r="2.2" fill="rgba(160,225,255,0.44)"/>
+        <circle cx="99"  cy="269" r="1.5" fill="rgba(160,225,255,0.32)"/>
+        <circle cx="138" cy="265" r="1.2" fill="rgba(160,225,255,0.26)"/>
+        <circle cx="186" cy="260" r="2.0" fill="rgba(160,225,255,0.44)"/>
+        <circle cx="177" cy="267" r="1.5" fill="rgba(160,225,255,0.30)"/>
       </motion.svg>
     </motion.div>
   )
@@ -141,16 +183,16 @@ export default function Hero() {
       {/* ── Kitesurfer ── */}
       <KitesurferSVG />
 
-      {/* ── Main content — left-aligned on desktop ── */}
+      {/* ── Main content ── */}
       <div style={{
         position: 'relative', zIndex: 2,
         width: '100%', maxWidth: 1280,
         margin: '0 auto',
-        padding: 'clamp(80px,12vh,140px) 24px 240px',
+        padding: 'clamp(80px,12vh,140px) 24px 290px',
       }}>
         <div className="hero-text-wrap">
 
-          {/* Credential pill — tiny, above headline */}
+          {/* Credential pill */}
           <motion.div
             initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }}
             transition={{ duration:0.5, delay:0.1 }}
@@ -167,7 +209,7 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          {/* HEADLINE — emotional, max impact */}
+          {/* Headline */}
           <motion.h1
             className="display"
             initial={{ opacity:0, y:56 }} animate={{ opacity:1, y:0 }}
@@ -185,7 +227,7 @@ export default function Hero() {
             <span style={{ color:'var(--accent-cyan)' }}>Opanuj wodę.</span>
           </motion.h1>
 
-          {/* SUBHEADLINE — 1 line only */}
+          {/* Subheadline — 1 linia */}
           <motion.p
             initial={{ opacity:0, y:14 }} animate={{ opacity:1, y:0 }}
             transition={{ duration:0.65, delay:0.52 }}
@@ -201,17 +243,15 @@ export default function Hero() {
             Certyfikowani instruktorzy IKO · Jastarnia & Tenerife · Pierwsza lekcja gratis
           </motion.p>
 
-          {/* CTA ROW */}
+          {/* CTAs */}
           <motion.div
             initial={{ opacity:0, y:14 }} animate={{ opacity:1, y:0 }}
             transition={{ duration:0.65, delay:0.68 }}
             style={{ display:'flex', alignItems:'center', gap:16, flexWrap:'wrap' }}
           >
-            {/* PRIMARY — dominant */}
             <a href="#contact" className="btn-hero-primary">
               Zarezerwuj lekcję →
             </a>
-            {/* SECONDARY — lower weight */}
             <a
               href="https://www.windfinder.com/forecast/hel"
               target="_blank" rel="noopener noreferrer"
@@ -222,7 +262,7 @@ export default function Hero() {
             </a>
           </motion.div>
 
-          {/* Social proof micro-line — below CTAs */}
+          {/* Social proof micro-line */}
           <motion.div
             initial={{ opacity:0 }} animate={{ opacity:1 }}
             transition={{ duration:0.6, delay:0.95 }}
@@ -242,7 +282,7 @@ export default function Hero() {
         initial={{ opacity:0 }} animate={{ opacity:1 }}
         transition={{ delay:1.3 }}
         style={{
-          position:'absolute', bottom:32, left:'50%', transform:'translateX(-50%)',
+          position:'absolute', bottom:38, left:'50%', transform:'translateX(-50%)',
           display:'flex', flexDirection:'column', alignItems:'center', gap:8, zIndex:2,
         }}
       >
@@ -256,62 +296,75 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* ── Wave divider ── */}
+      {/* ── Wave divider — wyższe, gładkie kopuły, szeroka maska ── */}
       <div style={{
-        position:'absolute', bottom:0, left:0, right:0, height:220, overflow:'hidden', zIndex:1,
-        WebkitMaskImage:'linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%)',
-        maskImage:'linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%)',
+        position:'absolute', bottom:0, left:0, right:0, height:280,
+        overflow:'hidden', zIndex:1,
+        WebkitMaskImage:'linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)',
+        maskImage:'linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)',
       }}>
-        {/* Ocean base */}
-        <div style={{ position:'absolute', bottom:0, left:0, right:0, height:170,
-          background:'linear-gradient(to top, rgba(0,15,52,0.96) 0%, rgba(0,30,95,0.70) 48%, transparent 100%)' }} />
+        {/* Ocean base fill */}
+        <div style={{ position:'absolute', bottom:0, left:0, right:0, height:220,
+          background:'linear-gradient(to top, rgba(0,12,48,0.97) 0%, rgba(0,28,90,0.74) 50%, transparent 100%)' }} />
 
-        {/* Swell 1 */}
+        {/* Swell 1 — najwolniejszy, najgłębszy, blur 6px */}
+        {/* Kopuły symetryczne: dołki przy x=0,720,1440 (y=220), szczyty przy x=360,1080 (y=155) */}
         <div className="wave-1" style={{ width:'200%', position:'absolute', bottom:0, filter:'blur(6px)' }}>
-          {[0,1].map(i=><svg key={i} viewBox="0 0 1440 220" preserveAspectRatio="none" style={{ width:'50%',height:220,display:'inline-block' }}>
-            <path d="M0,182 C180,168 360,186 540,172 C720,158 900,178 1080,162 C1220,150 1380,143 1440,140 L1440,220 L0,220 Z"
-              fill="rgba(0,30,115,0.65)"/>
-          </svg>)}
+          {[0,1].map(i=>(
+            <svg key={i} viewBox="0 0 1440 280" preserveAspectRatio="none"
+              style={{ width:'50%', height:280, display:'inline-block' }}>
+              <path
+                d="M0,220 C120,220 240,155 360,155 C480,155 600,220 720,220 C840,220 960,155 1080,155 C1200,155 1320,220 1440,220 L1440,280 L0,280 Z"
+                fill="rgba(0,22,95,0.72)"/>
+            </svg>
+          ))}
         </div>
 
-        {/* Swell 2 */}
+        {/* Swell 2 — średni, z linią grzbietu */}
+        {/* Dołki y=230, szczyty y=172 */}
         <div className="wave-2" style={{ width:'200%', position:'absolute', bottom:0, filter:'blur(3px)' }}>
-          {[0,1].map(i=><svg key={i} viewBox="0 0 1440 220" preserveAspectRatio="none" style={{ width:'50%',height:220,display:'inline-block' }}>
-            <path d="M0,188 C200,173 400,192 600,176 C800,161 1000,184 1200,165 C1320,154 1400,146 1440,143 L1440,220 L0,220 Z"
-              fill="rgba(0,70,170,0.50)"/>
-            <path d="M0,188 C200,173 400,192 600,176 C800,161 1000,184 1200,165 C1320,154 1400,146 1440,143"
-              stroke="rgba(6,214,247,0.55)" strokeWidth="3" fill="none"/>
-          </svg>)}
+          {[0,1].map(i=>(
+            <svg key={i} viewBox="0 0 1440 280" preserveAspectRatio="none"
+              style={{ width:'50%', height:280, display:'inline-block' }}>
+              <path
+                d="M0,230 C120,230 240,172 360,172 C480,172 600,230 720,230 C840,230 960,172 1080,172 C1200,172 1320,230 1440,230 L1440,280 L0,280 Z"
+                fill="rgba(0,55,158,0.52)"/>
+              {/* Linia grzbietu — cyan glow */}
+              <path
+                d="M0,230 C120,230 240,172 360,172 C480,172 600,230 720,230 C840,230 960,172 1080,172 C1200,172 1320,230 1440,230"
+                stroke="rgba(0,216,255,0.58)" strokeWidth="2.5" fill="none"/>
+            </svg>
+          ))}
         </div>
 
-        {/* Foam */}
+        {/* Foam — najszybszy, płytki, wiele małych kopuł */}
+        {/* Dołki y=256, szczyty y=240 */}
         <div className="wave-3" style={{ width:'200%', position:'absolute', bottom:0, filter:'blur(1.5px)' }}>
-          {[0,1].map(i=><svg key={i} viewBox="0 0 1440 110" preserveAspectRatio="none" style={{ width:'50%',height:110,display:'inline-block' }}>
-            <path d="M0,82 C180,72 360,84 540,74 C720,64 900,80 1080,68 C1220,58 1380,53 1440,50 L1440,110 L0,110 Z"
-              fill="rgba(0,120,205,0.32)"/>
-            <path d="M0,84 C140,80 280,86 420,82 C560,78 700,84 840,80 C980,76 1160,80 1340,74 C1400,72 1430,72 1440,70 L1440,92 L0,92 Z"
-              fill="rgba(180,238,255,0.11)"/>
-          </svg>)}
+          {[0,1].map(i=>(
+            <svg key={i} viewBox="0 0 1440 280" preserveAspectRatio="none"
+              style={{ width:'50%', height:280, display:'inline-block' }}>
+              {/* Główna pianka */}
+              <path
+                d="M0,256 C80,256 160,240 240,240 C320,240 400,256 480,256 C560,256 640,240 720,240 C800,240 880,256 960,256 C1040,256 1120,240 1200,240 C1280,240 1360,256 1440,256 L1440,280 L0,280 Z"
+                fill="rgba(0,105,190,0.36)"/>
+              {/* Biała pianka — highlight */}
+              <path
+                d="M0,258 C60,258 120,247 180,247 C240,247 300,258 360,258 C420,258 480,247 540,247 C600,247 660,258 720,258 C780,258 840,247 900,247 C960,247 1020,258 1080,258 C1140,258 1200,247 1260,247 C1320,247 1380,258 1440,258 L1440,268 L0,268 Z"
+                fill="rgba(185,240,255,0.13)"/>
+            </svg>
+          ))}
         </div>
       </div>
 
       <style>{`
         .hero-text-wrap { max-width: 580px; }
-
         @media (max-width: 860px) {
-          .hero-text-wrap {
-            max-width: 100%;
-            text-align: center;
-          }
+          .hero-text-wrap { max-width: 100%; text-align: center; }
           .hero-text-wrap > div { justify-content: center; }
           .hero-text-wrap p { margin-left: auto; margin-right: auto; }
         }
-
-        /* Ensure surfer doesn't overlap text on medium screens */
         @media (max-width: 680px) {
-          .hero-text-wrap h1 {
-            font-size: clamp(52px, 14vw, 80px) !important;
-          }
+          .hero-text-wrap h1 { font-size: clamp(52px, 14vw, 80px) !important; }
         }
       `}</style>
     </section>
