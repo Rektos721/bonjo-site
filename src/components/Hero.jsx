@@ -293,7 +293,14 @@ export default function Hero() {
           .hero-text-wrap { max-width: 100%; text-align: center; }
           .hero-text-wrap > div { justify-content: center; }
           .hero-text-wrap p { margin-left: auto; margin-right: auto; }
-          .hero-photo { display: none; }
+          /* Mobile: foto jako full-bleed bg zamiast side panel */
+          .hero-photo {
+            width: 100% !important;
+            left: 0 !important;
+            opacity: 0.45;
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%) !important;
+            mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%) !important;
+          }
         }
         @media (max-width: 680px) {
           .hero-text-wrap h1 { font-size: clamp(52px, 14vw, 80px) !important; }
