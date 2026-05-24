@@ -1,58 +1,66 @@
 import { motion } from 'framer-motion'
 
-/* ── Sky clouds — 3 shape variants, animated wrapper div (reliable), SVG blur inside ── */
+/* ── Sky clouds — Framer Motion animate (proven), 4 shapes, spread 0-48% hero ── */
 
-// shape=0: klasyczna — szeroka podstawa + dwie kopuły
-// shape=1: wydłużona — pozioma, jedna kopuła po lewej
-// shape=2: puchata — trzy równe kopuły, bardziej okrągła
-function cloudSVG(w, h, op, uid, shape) {
-  const f = (v) => v.toFixed(2)
-  const o = op, o9 = f(op*.90), o8 = f(op*.82), o7 = f(op*.74)
-  const blur = [
-    <filter key="f" id={uid} x="-55%" y="-90%" width="210%" height="280%">
-      <feGaussianBlur stdDeviation={shape === 1 ? '14 7' : shape === 2 ? '10 10' : '12 9'} />
-    </filter>
-  ]
-  if (shape === 1) return (
-    <svg aria-hidden="true" width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ display:'block', overflow:'visible' }}>
-      <defs>{blur}</defs>
-      <ellipse cx={w*.52} cy={h*.70} rx={w*.46} ry={h*.26} fill={`rgba(255,255,255,${o})`}  filter={`url(#${uid})`}/>
-      <ellipse cx={w*.22} cy={h*.36} rx={w*.16} ry={h*.24} fill={`rgba(255,255,255,${o9})`} filter={`url(#${uid})`}/>
-      <ellipse cx={w*.74} cy={h*.44} rx={w*.13} ry={h*.18} fill={`rgba(255,255,255,${o7})`} filter={`url(#${uid})`}/>
-    </svg>
-  )
-  if (shape === 2) return (
-    <svg aria-hidden="true" width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ display:'block', overflow:'visible' }}>
-      <defs>{blur}</defs>
-      <ellipse cx={w*.45} cy={h*.68} rx={w*.40} ry={h*.30} fill={`rgba(255,255,255,${o})`}  filter={`url(#${uid})`}/>
-      <ellipse cx={w*.24} cy={h*.32} rx={w*.19} ry={h*.30} fill={`rgba(255,255,255,${o9})`} filter={`url(#${uid})`}/>
-      <ellipse cx={w*.54} cy={h*.26} rx={w*.17} ry={h*.26} fill={`rgba(255,255,255,${o8})`} filter={`url(#${uid})`}/>
-      <ellipse cx={w*.74} cy={h*.46} rx={w*.14} ry={h*.20} fill={`rgba(255,255,255,${o7})`} filter={`url(#${uid})`}/>
-    </svg>
-  )
-  // shape 0 (default)
+// Renders one SVG cloud shape. 4 variants so they look distinct.
+function CloudShape({ w, h, op, uid, s }) {
+  const a = op.toFixed(2)
+  const b = (op * .85).toFixed(2)
+  const c = (op * .70).toFixed(2)
+  const d = (op * .55).toFixed(2)
+  const base = { display: 'block', overflow: 'visible' }
+
+  if (s === 1) // wispy cirrus — very flat, horizontal streaks
+    return (
+      <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={base}>
+        <defs><filter id={uid} x="-40%" y="-120%" width="180%" height="340%"><feGaussianBlur stdDeviation="22 7"/></filter></defs>
+        <ellipse cx={w*.50} cy={h*.60} rx={w*.48} ry={h*.22} fill={`rgba(255,255,255,${a})`} filter={`url(#${uid})`}/>
+        <ellipse cx={w*.28} cy={h*.40} rx={w*.18} ry={h*.16} fill={`rgba(255,255,255,${c})`} filter={`url(#${uid})`}/>
+        <ellipse cx={w*.76} cy={h*.38} rx={w*.15} ry={h*.14} fill={`rgba(255,255,255,${d})`} filter={`url(#${uid})`}/>
+      </svg>
+    )
+  if (s === 2) // small puffy — compact, 3 round domes side by side
+    return (
+      <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={base}>
+        <defs><filter id={uid} x="-50%" y="-80%" width="200%" height="260%"><feGaussianBlur stdDeviation="9 9"/></filter></defs>
+        <ellipse cx={w*.50} cy={h*.65} rx={w*.42} ry={h*.28} fill={`rgba(255,255,255,${a})`} filter={`url(#${uid})`}/>
+        <ellipse cx={w*.28} cy={h*.36} rx={w*.20} ry={h*.28} fill={`rgba(255,255,255,${b})`} filter={`url(#${uid})`}/>
+        <ellipse cx={w*.54} cy={h*.28} rx={w*.18} ry={h*.26} fill={`rgba(255,255,255,${b})`} filter={`url(#${uid})`}/>
+        <ellipse cx={w*.76} cy={h*.44} rx={w*.15} ry={h*.20} fill={`rgba(255,255,255,${c})`} filter={`url(#${uid})`}/>
+      </svg>
+    )
+  if (s === 3) // large stormy base — very wide, soft, dramatic
+    return (
+      <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={base}>
+        <defs><filter id={uid} x="-40%" y="-80%" width="180%" height="260%"><feGaussianBlur stdDeviation="28 16"/></filter></defs>
+        <ellipse cx={w*.50} cy={h*.70} rx={w*.48} ry={h*.28} fill={`rgba(255,255,255,${a})`} filter={`url(#${uid})`}/>
+        <ellipse cx={w*.32} cy={h*.38} rx={w*.24} ry={h*.30} fill={`rgba(255,255,255,${b})`} filter={`url(#${uid})`}/>
+        <ellipse cx={w*.62} cy={h*.32} rx={w*.20} ry={h*.26} fill={`rgba(255,255,255,${c})`} filter={`url(#${uid})`}/>
+      </svg>
+    )
+  // s === 0  classic cumulus — wide base + two distinct domes
   return (
-    <svg aria-hidden="true" width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ display:'block', overflow:'visible' }}>
-      <defs>{blur}</defs>
-      <ellipse cx={w*.46} cy={h*.70} rx={w*.42} ry={h*.30} fill={`rgba(255,255,255,${o})`}  filter={`url(#${uid})`}/>
-      <ellipse cx={w*.28} cy={h*.30} rx={w*.22} ry={h*.28} fill={`rgba(255,255,255,${o9})`} filter={`url(#${uid})`}/>
-      <ellipse cx={w*.62} cy={h*.46} rx={w*.18} ry={h*.20} fill={`rgba(255,255,255,${o8})`} filter={`url(#${uid})`}/>
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={base}>
+      <defs><filter id={uid} x="-50%" y="-90%" width="200%" height="280%"><feGaussianBlur stdDeviation="14 10"/></filter></defs>
+      <ellipse cx={w*.47} cy={h*.70} rx={w*.44} ry={h*.28} fill={`rgba(255,255,255,${a})`} filter={`url(#${uid})`}/>
+      <ellipse cx={w*.26} cy={h*.32} rx={w*.24} ry={h*.30} fill={`rgba(255,255,255,${b})`} filter={`url(#${uid})`}/>
+      <ellipse cx={w*.60} cy={h*.26} rx={w*.20} ry={h*.26} fill={`rgba(255,255,255,${c})`} filter={`url(#${uid})`}/>
+      <ellipse cx={w*.76} cy={h*.46} rx={w*.16} ry={h*.18} fill={`rgba(255,255,255,${d})`} filter={`url(#${uid})`}/>
     </svg>
   )
 }
 
-function SkyCloud({ top, left, w, h, op, anim, dur, del, shape = 0 }) {
-  const uid = `cb${del.replace(/[^0-9]/g, '')}`
+// dx/dy = max travel in px; dur = seconds for one way; Framer Mirror = smooth ping-pong
+function SkyCloud({ id, top, left, w, h, op, s = 0, dx, dy = -10, dur }) {
   return (
-    // div wrapper — CSS animations on div are rock-solid; SVG transform animations can glitch
-    <div aria-hidden="true" style={{
-      position: 'absolute', top, left, width: w, height: h,
-      pointerEvents: 'none',
-      animation: `${anim} ${dur} ease-in-out infinite ${del}`,
-      willChange: 'transform',
-    }}>
-      {cloudSVG(w, h, op, uid, shape)}
-    </div>
+    <motion.div
+      aria-hidden="true"
+      style={{ position: 'absolute', top, left, width: w, height: h, pointerEvents: 'none' }}
+      animate={{ x: dx, y: dy }}
+      transition={{ duration: dur, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }}
+    >
+      <CloudShape w={w} h={h} op={op} uid={`c${id}`} s={s} />
+    </motion.div>
   )
 }
 
@@ -167,20 +175,21 @@ export default function Hero() {
         bottom:-80, right:-100,
       }} />
 
-      {/* ── Chmury — inside hero, clip by overflow:hidden, before photo so photo paints on top ── */}
+      {/* ── Chmury — Framer Motion, spread 0-48% hero height ── */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
-        {/* Row 1 — very top ~0-6% */}
-        <SkyCloud top="1%"  left="-2%"  w={680} h={160} op={0.58} anim="drift-a" dur="22s" del="0s"   shape={0} />
-        <SkyCloud top="3%"  left="36%"  w={520} h={130} op={0.54} anim="drift-b" dur="28s" del="-9s"  shape={1} />
-        <SkyCloud top="0%"  left="68%"  w={560} h={140} op={0.56} anim="drift-c" dur="20s" del="-5s"  shape={2} />
-        {/* Row 2 — mid-top ~10-18% */}
-        <SkyCloud top="11%" left="5%"   w={440} h={112} op={0.52} anim="drift-d" dur="25s" del="-14s" shape={2} />
-        <SkyCloud top="13%" left="44%"  w={560} h={136} op={0.54} anim="drift-a" dur="30s" del="-7s"  shape={0} />
-        <SkyCloud top="9%"  left="80%"  w={380} h={96}  op={0.50} anim="drift-b" dur="18s" del="-12s" shape={1} />
-        {/* Row 3 — lower sky ~22-38% */}
-        <SkyCloud top="24%" left="-1%"  w={620} h={150} op={0.50} anim="drift-c" dur="24s" del="-18s" shape={1} />
-        <SkyCloud top="28%" left="40%"  w={480} h={120} op={0.48} anim="drift-d" dur="27s" del="-4s"  shape={2} />
-        <SkyCloud top="22%" left="74%"  w={500} h={124} op={0.49} anim="drift-a" dur="22s" del="-10s" shape={0} />
+        {/* top band */}
+        <SkyCloud id={0} top="0%"  left="-3%"  w={620} h={150} op={0.62} s={0} dx={130}  dy={-14} dur={18} />
+        <SkyCloud id={1} top="3%"  left="52%"  w={460} h={115} op={0.58} s={1} dx={-110} dy={8}   dur={23} />
+        {/* mid band */}
+        <SkyCloud id={2} top="13%" left="10%"  w={380} h={95}  op={0.55} s={2} dx={100}  dy={-10} dur={20} />
+        <SkyCloud id={3} top="11%" left="66%"  w={520} h={130} op={0.60} s={3} dx={-140} dy={12}  dur={26} />
+        {/* lower band */}
+        <SkyCloud id={4} top="26%" left="-2%"  w={540} h={135} op={0.56} s={1} dx={120}  dy={-8}  dur={22} />
+        <SkyCloud id={5} top="28%" left="45%"  w={400} h={100} op={0.52} s={2} dx={-95}  dy={10}  dur={19} />
+        <SkyCloud id={6} top="24%" left="78%"  w={340} h={88}  op={0.50} s={0} dx={90}   dy={-12} dur={17} />
+        {/* bottom sky band */}
+        <SkyCloud id={7} top="41%" left="15%"  w={480} h={120} op={0.50} s={3} dx={-115} dy={8}   dur={24} />
+        <SkyCloud id={8} top="44%" left="58%"  w={360} h={90}  op={0.48} s={0} dx={105}  dy={-10} dur={21} />
       </div>
 
       {/* ── Hero photo ── */}
