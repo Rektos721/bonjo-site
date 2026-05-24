@@ -34,22 +34,32 @@ function HeroPhoto() {
         }}
       />
 
-      {/* Left fade — topi się w ciemne tło hero */}
+      {/* Left fade — szeroka, miękka, 7 stopni */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'linear-gradient(to right, #07162a 0%, rgba(7,22,42,0.88) 12%, rgba(7,22,42,0.55) 26%, rgba(7,22,42,0.15) 48%, transparent 68%)',
+        background: [
+          'linear-gradient(to right,',
+          '#0e2540       0%,',
+          'rgba(14,37,64,0.94) 8%,',
+          'rgba(14,37,64,0.80) 18%,',
+          'rgba(14,37,64,0.58) 30%,',
+          'rgba(14,37,64,0.32) 46%,',
+          'rgba(14,37,64,0.12) 62%,',
+          'rgba(14,37,64,0.03) 75%,',
+          'transparent 84%)',
+        ].join(' '),
       }} />
 
       {/* Bottom fade — przejście w fale */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'linear-gradient(to top, #07162a 0%, rgba(7,22,42,0.80) 16%, rgba(7,22,42,0.3) 36%, transparent 58%)',
+        background: 'linear-gradient(to top, #0e2540 0%, rgba(14,37,64,0.78) 16%, rgba(14,37,64,0.28) 36%, transparent 58%)',
       }} />
 
       {/* Top vignette */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'linear-gradient(to bottom, rgba(7,22,42,0.55) 0%, transparent 20%)',
+        background: 'linear-gradient(to bottom, rgba(14,37,64,0.50) 0%, transparent 20%)',
       }} />
 
       {/* Subtelny cyan color-grade */}
@@ -69,14 +79,14 @@ export default function Hero() {
       minHeight: '100vh',
       display: 'flex',
       alignItems: 'center',
-      background: '#07162a',
+      background: '#0e2540',
       overflow: 'hidden',
     }}>
 
       {/* ── Sky gradient ── */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
-        background: 'linear-gradient(180deg, #0d2f5e 0%, #112f5f 28%, #0c2450 62%, #07182e 100%)',
+        background: 'linear-gradient(180deg, #15366e 0%, #17386e 28%, #133060 62%, #0e2540 100%)',
       }} />
 
       {/* ── Stars ── */}
