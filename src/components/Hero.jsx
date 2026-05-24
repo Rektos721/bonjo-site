@@ -68,14 +68,14 @@ export default function Hero() {
       minHeight: '100vh',
       display: 'flex',
       alignItems: 'center',
-      background: '#0e2540',
+      background: '#1b3f6a',
       overflow: 'hidden',
     }}>
 
       {/* ── Sky gradient ── */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
-        background: 'linear-gradient(180deg, #15366e 0%, #17386e 28%, #133060 62%, #0e2540 100%)',
+        background: 'linear-gradient(180deg, #1e4e98 0%, #224e96 28%, #1c4484 62%, #1b3f6a 100%)',
       }} />
 
       {/* ── Stars ── */}
@@ -95,21 +95,21 @@ export default function Hero() {
         ].join(','),
       }} />
 
-      {/* ── Golden sun ── */}
-      <div style={{ position:'absolute',pointerEvents:'none', width:700, height:700, borderRadius:'50%',
-        background:'radial-gradient(circle, rgba(244,196,48,0.22) 0%, rgba(244,160,20,0.09) 38%, transparent 62%)',
-        top:'-10%', left:'-8%', filter:'blur(38px)', animation:'orb3 32s ease-in-out infinite' }} />
-      <div style={{ position:'absolute',pointerEvents:'none', width:340, height:340, borderRadius:'50%',
-        background:'radial-gradient(circle, rgba(255,218,72,0.38) 0%, rgba(244,196,48,0.16) 50%, transparent 72%)',
-        top:'-1%', left:'0%', filter:'blur(18px)', animation:'orb3 32s ease-in-out infinite' }} />
-      <div style={{ position:'absolute',pointerEvents:'none', width:130, height:130, borderRadius:'50%',
-        background:'radial-gradient(circle, rgba(255,240,130,0.65) 0%, rgba(255,218,72,0.35) 55%, transparent 80%)',
-        top:'4%', left:'5%', filter:'blur(7px)', animation:'orb3 32s ease-in-out infinite' }} />
+      {/* ── Horyzont — ciepła poświata, bez animacji, bez orba ── */}
+      <div style={{
+        position:'absolute', pointerEvents:'none',
+        width:680, height:320, borderRadius:'50%',
+        background:'radial-gradient(ellipse, rgba(255,210,90,0.10) 0%, rgba(255,185,55,0.03) 55%, transparent 75%)',
+        top:'-6%', right:'10%',
+        filter:'blur(55px)',
+      }} />
 
       {/* Cyan ambient glow */}
-      <div style={{ position:'absolute',pointerEvents:'none', width:700, height:700, borderRadius:'50%',
-        background:'radial-gradient(circle, rgba(6,214,247,0.11) 0%, transparent 65%)',
-        bottom:-100, right:-120, animation:'orb2 18s ease-in-out infinite' }} />
+      <div style={{
+        position:'absolute', pointerEvents:'none', width:600, height:600, borderRadius:'50%',
+        background:'radial-gradient(circle, rgba(6,214,247,0.09) 0%, transparent 65%)',
+        bottom:-80, right:-100,
+      }} />
 
       {/* ── Hero photo ── */}
       <HeroPhoto />

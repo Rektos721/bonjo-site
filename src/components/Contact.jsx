@@ -68,7 +68,7 @@ export default function Contact() {
 
   return (
     <section id="contact" style={{ position:'relative', padding:'96px 24px 100px', overflow:'hidden',
-      background:'linear-gradient(160deg, #0f2b50 0%, #143768 60%, #0e2848 100%)' }}>
+      background:'linear-gradient(160deg, #183d68 0%, #1e4a80 60%, #1b3f68 100%)' }}>
 
       {/* Decorative glow */}
       <div style={{ position:'absolute', top:'-10%', left:'-5%', width:500, height:500, borderRadius:'50%',
