@@ -39,48 +39,51 @@ function mkShape(ovals, glowOp) {
   }
 }
 
+// Opacity per oval: 0.30–0.37 — bez mix-blend-mode
+// 4 ovals × 0.33 = efektywna biel ~81% w centrum (alpha stacking)
+// 5 ovals × 0.31 = ~84% — wystarczy na solidną białą chmurę
 const S = [
-  // 0 — classic cumulus: 4 kopuły, środkowa najwyższa   [w≈420, h≈165]
+  // 0 — classic cumulus   [w≈420, h≈165]
   mkShape([
-    [50, 74, 46, 30, 0.87],
-    [24, 50, 22, 35, 0.81],
-    [50, 36, 25, 40, 0.91],
-    [76, 56, 21, 30, 0.79],
+    [50, 74, 46, 30, 0.35],
+    [24, 50, 22, 35, 0.33],
+    [50, 36, 25, 40, 0.36],
+    [76, 56, 21, 30, 0.32],
+  ], 0.12),
+
+  // 1 — wide flat         [w≈620, h≈188]
+  mkShape([
+    [50, 82, 50, 22, 0.33],
+    [10, 56, 18, 32, 0.31],
+    [32, 42, 20, 38, 0.34],
+    [68, 40, 19, 36, 0.32],
+    [90, 60, 15, 27, 0.29],
   ], 0.11),
 
-  // 1 — wide flat: 5 kopuł rozłożonych szeroko, wyraźnie wyższych [w≈620, h≈188]
+  // 2 — tall tower        [w≈360, h≈228]
   mkShape([
-    [50, 82, 50, 22, 0.83],
-    [10, 56, 18, 32, 0.77],
-    [32, 42, 20, 38, 0.82],
-    [68, 40, 19, 36, 0.80],
-    [90, 60, 15, 27, 0.71],
-  ], 0.10),
-
-  // 2 — tall tower: szeroka podstawa, wysoka jednotopowa kopuła [w≈360, h≈228]
-  mkShape([
-    [50, 86, 38, 20, 0.83],
-    [36, 60, 17, 32, 0.77],
-    [50, 26, 28, 52, 0.94],
-    [65, 62, 17, 30, 0.75],
+    [50, 86, 38, 20, 0.33],
+    [36, 60, 17, 32, 0.31],
+    [50, 26, 28, 52, 0.37],
+    [65, 62, 17, 30, 0.30],
   ], 0.13),
 
-  // 3 — storm complex: 5 nakładających się brył, dramatyczna [w≈548, h≈202]
+  // 3 — storm complex     [w≈548, h≈202]
   mkShape([
-    [50, 82, 50, 22, 0.87],
-    [16, 52, 21, 38, 0.83],
-    [42, 28, 22, 48, 0.93],
-    [68, 32, 21, 46, 0.89],
-    [90, 58, 16, 28, 0.77],
+    [50, 82, 50, 22, 0.35],
+    [16, 52, 21, 38, 0.33],
+    [42, 28, 22, 48, 0.37],
+    [68, 32, 21, 46, 0.36],
+    [90, 58, 16, 28, 0.31],
   ], 0.14),
 
-  // 4 — compact three-dome: 4 kopuły, zwarta i wyraźna         [w≈480, h≈168]
+  // 4 — compact           [w≈480, h≈168]
   mkShape([
-    [50, 78, 46, 26, 0.81],
-    [24, 52, 24, 36, 0.75],
-    [76, 50, 20, 34, 0.73],
-    [50, 36, 22, 32, 0.77],
-  ], 0.10),
+    [50, 78, 46, 26, 0.32],
+    [24, 52, 24, 36, 0.30],
+    [76, 50, 20, 34, 0.29],
+    [50, 36, 22, 32, 0.31],
+  ], 0.11),
 ]
 
 function Cloud({ top, left, w, h, s, dx, dy, dur }) {
@@ -106,7 +109,6 @@ export default function GlobalClouds() {
       style={{
         position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
         zIndex: 1, pointerEvents: 'none',
-        mixBlendMode: 'screen',
       }}
     >
       {/* ── Hero 0–100vh: intentionally cloud-free ───────────── */}
