@@ -55,21 +55,21 @@ const S = [
     [76, 56, 21, 30, 0.78],
   ], 0.10),
 
-  // 1 — wide flat: 5 very shallow bumps along low horizon
+  // 1 — wide flat: 5 bumps, raised higher so the cloud is taller overall
   mkShape([
     [50, 82, 50, 22, 0.82],
-    [10, 64, 16, 24, 0.74],
-    [32, 54, 18, 28, 0.78],
-    [68, 52, 17, 27, 0.76],
-    [90, 66, 13, 20, 0.68],
-  ], 0.08),
+    [10, 56, 18, 32, 0.76],
+    [32, 42, 20, 38, 0.81],
+    [68, 40, 19, 36, 0.79],
+    [90, 60, 15, 27, 0.70],
+  ], 0.09),
 
-  // 2 — tall tower: narrow base, single soaring dome (negative top = clips at top)
+  // 2 — tall tower: wider base and dome so it reads as a real cloud, not a stripe
   mkShape([
-    [50, 86, 32, 18, 0.80],
-    [38, 62, 14, 28, 0.74],
-    [50, 28, 22, 48, 0.92],
-    [62, 64, 14, 26, 0.72],
+    [50, 86, 38, 20, 0.82],
+    [36, 60, 17, 32, 0.76],
+    [50, 26, 28, 52, 0.93],
+    [65, 62, 17, 30, 0.74],
   ], 0.12),
 
   // 3 — storm complex: 5 overlapping masses, dramatic and large
@@ -81,12 +81,13 @@ const S = [
     [90, 58, 16, 28, 0.76],
   ], 0.13),
 
-  // 4 — wispy: thin, elongated, faint — looks like cirrus
+  // 4 — compact three-dome: rounder and taller than old wispy, still lighter
   mkShape([
-    [50, 64, 52, 20, 0.70],
-    [18, 52, 22, 24, 0.63],
-    [80, 50, 18, 22, 0.62],
-  ], 0.07),
+    [50, 78, 46, 26, 0.80],
+    [24, 52, 24, 36, 0.74],
+    [76, 50, 20, 34, 0.72],
+    [50, 36, 22, 32, 0.76],
+  ], 0.09),
 ]
 
 function Cloud({ top, left, w, h, s, dx, dy, dur }) {
@@ -124,28 +125,28 @@ export default function GlobalClouds() {
       {/* ── Hero 0–100vh — BRAK CHMUR — zdjęcie wolne ─────────────────── */}
 
       {/* ── HowItWorks + About (100–195vh) ── */}
-      <Cloud top="103vh" left="-4vw"  w={600} h={145} s={1} dx={ 118} dy={-11} dur={28} />
+      <Cloud top="103vh" left="-4vw"  w={620} h={188} s={1} dx={ 118} dy={-11} dur={28} />
       <Cloud top="134vh" left="50vw"  w={548} h={200} s={3} dx={-108} dy={ 12} dur={25} />
       <Cloud top="182vh" left="67vw"  w={420} h={165} s={0} dx={ 100} dy={-13} dur={22} />
 
       {/* ── Instructors + Locations (198–285vh) ── */}
-      <Cloud top="200vh" left="4vw"   w={300} h={215} s={2} dx={-120} dy={ 11} dur={30} />
-      <Cloud top="246vh" left="42vw"  w={500} h={112} s={4} dx={ 108} dy={-10} dur={23} />
-      <Cloud top="278vh" left="66vw"  w={590} h={143} s={1} dx={-96}  dy={ 12} dur={26} />
+      <Cloud top="200vh" left="4vw"   w={360} h={228} s={2} dx={-120} dy={ 11} dur={30} />
+      <Cloud top="246vh" left="42vw"  w={480} h={168} s={4} dx={ 108} dy={-10} dur={23} />
+      <Cloud top="278vh" left="66vw"  w={620} h={186} s={1} dx={-96}  dy={ 12} dur={26} />
 
       {/* ── Courses + Gallery (305–400vh) ── */}
       <Cloud top="308vh" left="-2vw"  w={548} h={202} s={3} dx={ 126} dy={-12} dur={27} />
       <Cloud top="360vh" left="50vw"  w={422} h={168} s={0} dx={-114} dy={ 12} dur={24} />
-      <Cloud top="393vh" left="73vw"  w={302} h={218} s={2} dx={ 104} dy={-11} dur={21} />
+      <Cloud top="393vh" left="73vw"  w={362} h={226} s={2} dx={ 104} dy={-11} dur={21} />
 
       {/* ── Reviews + Pricing (418–480vh) ── */}
-      <Cloud top="420vh" left="10vw"  w={500} h={112} s={4} dx={-106} dy={ 10} dur={22} />
-      <Cloud top="468vh" left="55vw"  w={608} h={142} s={1} dx={ 116} dy={-13} dur={25} />
+      <Cloud top="420vh" left="10vw"  w={480} h={168} s={4} dx={-106} dy={ 10} dur={22} />
+      <Cloud top="468vh" left="55vw"  w={618} h={186} s={1} dx={ 116} dy={-13} dur={25} />
 
       {/* ── FAQ + CTA + Contact + Footer (528–645vh) ── */}
       <Cloud top="530vh" left="2vw"   w={548} h={202} s={3} dx={-122} dy={ 11} dur={28} />
       <Cloud top="586vh" left="46vw"  w={424} h={168} s={0} dx={ 112} dy={-12} dur={26} />
-      <Cloud top="640vh" left="71vw"  w={300} h={216} s={2} dx={-102} dy={ 10} dur={23} />
+      <Cloud top="640vh" left="71vw"  w={360} h={226} s={2} dx={-102} dy={ 10} dur={23} />
     </div>
   )
 }

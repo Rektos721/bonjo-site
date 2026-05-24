@@ -64,6 +64,7 @@ export default function Gallery() {
                 overflow: 'hidden',
                 position: 'relative',
                 cursor: 'pointer',
+                zIndex: 2,
               }}
             >
               <img

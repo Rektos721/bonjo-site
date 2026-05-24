@@ -93,6 +93,7 @@ export default function Instructors() {
                 borderRadius: 18, overflow: 'hidden',
                 border: '1px solid rgba(255,255,255,0.07)',
                 background: 'var(--glass-bg)',
+                position: 'relative', zIndex: 2,
               }}
             >
               {/* Photo */}
