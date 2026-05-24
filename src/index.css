@@ -17,12 +17,19 @@
 
 /* ── GLOBALS ───────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; font-size: 16px; }
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: 'DM Sans', sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Larger section spacing on wide screens */
+@media (min-width: 1280px) {
+  section { scroll-margin-top: 72px; }
 }
 
 /* Custom scrollbar */
