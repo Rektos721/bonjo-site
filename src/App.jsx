@@ -14,14 +14,13 @@ import FinalCTA       from './components/FinalCTA'
 import Contact        from './components/Contact'
 import Footer         from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
-
-// GlobalClouds usunięte — chmury przeniesione do Hero.jsx (niebo hero)
-// Powód: globalny overlay z-index:1 wchodził na zdjęcia i tworzył artefakty
+import GlobalClouds   from './components/GlobalClouds'
 
 export default function App() {
   return (
     <div style={{ position: 'relative' }}>
       <div className="noise" aria-hidden="true" />
+      <GlobalClouds />
       <Nav />
       <Hero />
       <TrustBar />
