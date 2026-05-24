@@ -54,7 +54,7 @@ function Cloud({ top, dir, dur, del, w, h, rgb, op, rx }) {
 function GlobalClouds() {
   return (
     <div style={{
-      position:'fixed', inset:0, zIndex:80,
+      position:'absolute', top:0, left:0, right:0, bottom:0, zIndex:1,
       pointerEvents:'none', mixBlendMode:'screen', overflow:'hidden',
     }}>
       <Cloud top="7%"  dir="ltr" dur="88s"  del="-70s" w={500} h={120} rgb="218,234,250" op={0.14} />
@@ -70,7 +70,7 @@ function GlobalClouds() {
 
 export default function App() {
   return (
-    <>
+    <div style={{ position: 'relative' }}>
       <div className="noise" aria-hidden="true" />
       <GlobalClouds />
       <Nav />
@@ -89,6 +89,6 @@ export default function App() {
       <Contact />
       <Footer />
       <WhatsAppButton />
-    </>
+    </div>
   )
 }

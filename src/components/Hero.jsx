@@ -1,7 +1,18 @@
 import { motion } from 'framer-motion'
 
-/* ── Hero photo — right-side action shot dissolving into background ── */
+/* ── Hero photo — right-side, dissolves via CSS mask (true transparency) ── */
 function HeroPhoto() {
+  // mask-image = prawdziwa przezroczystość, zero color mismatch z tłem
+  const maskLR = [
+    'transparent 0%',
+    'rgba(0,0,0,0.02) 7%',
+    'rgba(0,0,0,0.09) 15%',
+    'rgba(0,0,0,0.24) 25%',
+    'rgba(0,0,0,0.50) 37%',
+    'rgba(0,0,0,0.78) 50%',
+    'black 63%',
+  ].join(', ')
+
   return (
     <motion.div
       aria-hidden="true"
@@ -12,13 +23,16 @@ function HeroPhoto() {
       style={{
         position: 'absolute',
         right: 0, top: 0, bottom: 0,
-        width: '56%',
+        width: '58%',
         zIndex: 1,
         pointerEvents: 'none',
         overflow: 'hidden',
+        // Mask lewo-prawo: prawdziwa przezroczystość, nie kolorowa nakładka
+        WebkitMaskImage: `linear-gradient(to right, ${maskLR})`,
+        maskImage:        `linear-gradient(to right, ${maskLR})`,
       }}
     >
-      {/* Actual photo — slow Ken Burns zoom-out */}
+      {/* Zdjęcie — Ken Burns zoom-out */}
       <motion.img
         src="https://images.unsplash.com/photo-1578060124065-41f863eb9ebe?w=1100&h=1500&fit=crop&q=88"
         alt=""
@@ -29,44 +43,19 @@ function HeroPhoto() {
           width: '100%', height: '100%',
           objectFit: 'cover',
           objectPosition: 'center 22%',
-          filter: 'saturate(0.82) brightness(0.62)',
+          filter: 'saturate(0.80) brightness(0.60)',
           display: 'block',
         }}
       />
-
-      {/* Left fade — szeroka, miękka, 7 stopni */}
+      {/* Bottom — ciemna nakładka w stronę fal (kolor-agnostyczna, rgba) */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: [
-          'linear-gradient(to right,',
-          '#0e2540       0%,',
-          'rgba(14,37,64,0.94) 8%,',
-          'rgba(14,37,64,0.80) 18%,',
-          'rgba(14,37,64,0.58) 30%,',
-          'rgba(14,37,64,0.32) 46%,',
-          'rgba(14,37,64,0.12) 62%,',
-          'rgba(14,37,64,0.03) 75%,',
-          'transparent 84%)',
-        ].join(' '),
+        background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 18%, rgba(0,0,0,0.08) 36%, transparent 54%)',
       }} />
-
-      {/* Bottom fade — przejście w fale */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(to top, #0e2540 0%, rgba(14,37,64,0.78) 16%, rgba(14,37,64,0.28) 36%, transparent 58%)',
-      }} />
-
       {/* Top vignette */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'linear-gradient(to bottom, rgba(14,37,64,0.50) 0%, transparent 20%)',
-      }} />
-
-      {/* Subtelny cyan color-grade */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(145deg, transparent 40%, rgba(0,100,200,0.10) 100%)',
-        mixBlendMode: 'screen',
+        background: 'linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, transparent 18%)',
       }} />
     </motion.div>
   )
