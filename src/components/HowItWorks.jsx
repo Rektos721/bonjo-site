@@ -42,7 +42,7 @@ const STEPS = [
     num: '03',
     Icon: IcoKite,
     title: 'Jedź samodzielnie',
-    desc: 'Po kursie masz latawiec pod kontrolą i ruszasz na wodę. Opcjonalnie z certyfikatem IKO Level 1.',
+    desc: 'Po kursie masz latawiec pod kontrolą i ruszasz na wodę. Opcjonalnie z certyfikatem IKO Level 1.',
   },
 ]
 
