@@ -1,32 +1,38 @@
 import { motion } from 'framer-motion'
 
-/* ── Sky cloud — radial-gradient only, zero filter:blur, zero gray halo ── */
+/* ── Sky cloud — SVG ellipses + feGaussianBlur (contained in SVG, zero page halo) ── */
 function SkyCloud({ top, left, w, h, op, anim, dur, del }) {
-  const o  = op
-  const o2 = +(op * 0.55).toFixed(2)
-  const o3 = +(op * 0.20).toFixed(2)
-  const o4 = +(op * 0.75).toFixed(2)
-  const o5 = +(op * 0.33).toFixed(2)
-  const o6 = +(op * 0.58).toFixed(2)
-  const o7 = +(op * 0.18).toFixed(2)
+  // unique filter ID per cloud (del is unique per cloud)
+  const uid = `cb${del.replace(/[^0-9]/g, '')}`
   return (
-    <div style={{
-      position: 'absolute', top, left, width: w, height: h,
-      pointerEvents: 'none',
-      animation: `${anim} ${dur} ease-in-out infinite ${del}`,
-      willChange: 'transform',
-      mixBlendMode: 'screen',
-    }}>
-      {/* Base body */}
-      <div style={{ position: 'absolute', inset: 0,
-        background: `radial-gradient(ellipse at 42% 60%, rgba(255,255,255,${o}) 0%, rgba(240,249,255,${o2}) 30%, rgba(220,242,255,${o3}) 58%, transparent 72%)` }} />
+    <svg
+      aria-hidden="true"
+      width={w} height={h}
+      viewBox={`0 0 ${w} ${h}`}
+      style={{
+        position: 'absolute', top, left,
+        overflow: 'visible',
+        pointerEvents: 'none',
+        animation: `${anim} ${dur} ease-in-out infinite ${del}`,
+        willChange: 'transform',
+      }}
+    >
+      <defs>
+        {/* Filter region generous enough to contain the full blur — no clipping, no halo */}
+        <filter id={uid} x="-55%" y="-90%" width="210%" height="280%">
+          <feGaussianBlur stdDeviation="13 9" />
+        </filter>
+      </defs>
+      {/* Main body */}
+      <ellipse cx={w * 0.46} cy={h * 0.68} rx={w * 0.40} ry={h * 0.30}
+        fill={`rgba(255,255,255,${op})`} filter={`url(#${uid})`} />
       {/* Upper dome */}
-      <div style={{ position: 'absolute', width: '50%', height: '115%', left: '15%', top: '-38%',
-        background: `radial-gradient(ellipse at 50% 58%, rgba(255,255,255,${o4}) 0%, rgba(240,249,255,${o5}) 40%, transparent 64%)` }} />
+      <ellipse cx={w * 0.30} cy={h * 0.28} rx={w * 0.20} ry={h * 0.27}
+        fill={`rgba(255,255,255,${(op * 0.88).toFixed(2)})`} filter={`url(#${uid})`} />
       {/* Right lobe */}
-      <div style={{ position: 'absolute', width: '62%', height: '52%', left: '50%', top: '20%',
-        background: `radial-gradient(ellipse at 38% 50%, rgba(255,255,255,${o6}) 0%, rgba(240,249,255,${o7}) 40%, transparent 62%)` }} />
-    </div>
+      <ellipse cx={w * 0.64} cy={h * 0.50} rx={w * 0.17} ry={h * 0.19}
+        fill={`rgba(255,255,255,${(op * 0.76).toFixed(2)})`} filter={`url(#${uid})`} />
+    </svg>
   )
 }
 
@@ -143,15 +149,15 @@ export default function Hero() {
 
       {/* ── Chmury — inside hero, clip by overflow:hidden, before photo so photo paints on top ── */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
-        <SkyCloud top="2%"  left="1%"  w={620} h={145} op={0.52} anim="drift-a" dur="22s" del="0s" />
-        <SkyCloud top="5%"  left="38%" w={480} h={118} op={0.48} anim="drift-b" dur="28s" del="-9s" />
-        <SkyCloud top="0%"  left="66%" w={540} h={130} op={0.50} anim="drift-c" dur="20s" del="-5s" />
-        <SkyCloud top="12%" left="12%" w={400} h={100} op={0.46} anim="drift-d" dur="25s" del="-14s" />
-        <SkyCloud top="14%" left="56%" w={520} h={124} op={0.48} anim="drift-a" dur="30s" del="-7s" />
-        <SkyCloud top="8%"  left="78%" w={340} h={88}  op={0.44} anim="drift-b" dur="18s" del="-12s" />
-        <SkyCloud top="22%" left="4%"  w={580} h={138} op={0.46} anim="drift-c" dur="24s" del="-18s" />
-        <SkyCloud top="25%" left="44%" w={440} h={108} op={0.44} anim="drift-d" dur="27s" del="-4s" />
-        <SkyCloud top="20%" left="72%" w={460} h={112} op={0.45} anim="drift-a" dur="22s" del="-10s" />
+        <SkyCloud top="2%"  left="1%"  w={620} h={145} op={0.44} anim="drift-a" dur="22s" del="0s" />
+        <SkyCloud top="5%"  left="38%" w={480} h={118} op={0.40} anim="drift-b" dur="28s" del="-9s" />
+        <SkyCloud top="0%"  left="66%" w={540} h={130} op={0.42} anim="drift-c" dur="20s" del="-5s" />
+        <SkyCloud top="12%" left="12%" w={400} h={100} op={0.38} anim="drift-d" dur="25s" del="-14s" />
+        <SkyCloud top="14%" left="56%" w={520} h={124} op={0.40} anim="drift-a" dur="30s" del="-7s" />
+        <SkyCloud top="8%"  left="78%" w={340} h={88}  op={0.36} anim="drift-b" dur="18s" del="-12s" />
+        <SkyCloud top="22%" left="4%"  w={580} h={138} op={0.38} anim="drift-c" dur="24s" del="-18s" />
+        <SkyCloud top="25%" left="44%" w={440} h={108} op={0.36} anim="drift-d" dur="27s" del="-4s" />
+        <SkyCloud top="20%" left="72%" w={460} h={112} op={0.37} anim="drift-a" dur="22s" del="-10s" />
       </div>
 
       {/* ── Hero photo ── */}
