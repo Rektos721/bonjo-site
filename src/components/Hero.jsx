@@ -1,131 +1,63 @@
 import { motion } from 'framer-motion'
 
-/* ── Kitesurfer SVG ─── */
-function KitesurferSVG() {
+/* ── Hero photo — right-side action shot dissolving into background ── */
+function HeroPhoto() {
   return (
     <motion.div
-      initial={{ opacity: 0, x: 60 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 1.2, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      aria-hidden="true"
+      className="hero-photo"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 2.0, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
       style={{
-        position: 'absolute', right: '3%', bottom: '0px',
-        zIndex: 2, pointerEvents: 'none',
-        filter: [
-          'blur(0.4px)',
-          'drop-shadow(0 0 64px rgba(0,200,255,0.72))',
-          'drop-shadow(0 14px 44px rgba(0,10,50,0.96))',
-          'drop-shadow(0 0 22px rgba(26,107,160,0.55))',
-        ].join(' '),
+        position: 'absolute',
+        right: 0, top: 0, bottom: 0,
+        width: '56%',
+        zIndex: 1,
+        pointerEvents: 'none',
+        overflow: 'hidden',
       }}
     >
-      <motion.svg
-        width="400" height="580" viewBox="0 0 200 290" fill="none"
-        animate={{ y: [0, -7, 0], rotate: [-0.6, 0.9, -0.6] }}
-        transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
-      >
-        {/* ══ KITE ══ */}
-        <ellipse cx="155" cy="42" rx="52" ry="44" fill="rgba(0,140,220,0.07)" />
-        <path d="M118,52 Q136,7 155,8 Q174,7 192,52 Q182,74 155,76 Q128,74 118,52Z"
-          fill="#0085c8" opacity="0.92"/>
-        <path d="M118,52 Q128,16 142,13 Q137,62 120,68Z" fill="rgba(0,15,90,0.44)"/>
-        <path d="M192,52 Q182,16 168,13 Q173,62 190,68Z" fill="rgba(0,15,90,0.44)"/>
-        {/* Leading edge */}
-        <path d="M118,52 Q136,7 155,8 Q174,7 192,52"
-          stroke="#70e5ff" strokeWidth="8.5" strokeLinecap="round" fill="none" opacity="0.92"/>
-        <path d="M128,38 Q155,12 182,38"
-          stroke="rgba(210,250,255,0.35)" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
-        {/* Struts */}
-        <line x1="142" y1="13" x2="137" y2="72" stroke="rgba(255,255,255,0.18)" strokeWidth="1.1"/>
-        <line x1="155" y1="8"  x2="155" y2="76" stroke="rgba(255,255,255,0.18)" strokeWidth="1.1"/>
-        <line x1="168" y1="13" x2="173" y2="72" stroke="rgba(255,255,255,0.18)" strokeWidth="1.1"/>
-        <path d="M118,52 Q130,74 155,76 Q180,74 192,52"
-          stroke="rgba(0,150,210,0.30)" strokeWidth="1.5" fill="none"/>
+      {/* Actual photo — slow Ken Burns zoom-out */}
+      <motion.img
+        src="https://images.unsplash.com/photo-1578060124065-41f863eb9ebe?w=1100&h=1500&fit=crop&q=88"
+        alt=""
+        initial={{ scale: 1.07 }}
+        animate={{ scale: 1.0 }}
+        transition={{ duration: 2.6, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          width: '100%', height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center 22%',
+          filter: 'saturate(0.82) brightness(0.62)',
+          display: 'block',
+        }}
+      />
 
-        {/* ══ CONTROL LINES ══ */}
-        <line x1="128" y1="70" x2="72" y2="172" stroke="rgba(110,210,240,0.55)" strokeWidth="1.4"/>
-        <line x1="182" y1="70" x2="108" y2="172" stroke="rgba(110,210,240,0.55)" strokeWidth="1.4"/>
+      {/* Left fade — topi się w ciemne tło hero */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(to right, #07162a 0%, rgba(7,22,42,0.88) 12%, rgba(7,22,42,0.55) 26%, rgba(7,22,42,0.15) 48%, transparent 68%)',
+      }} />
 
-        {/* ══ CONTROL BAR ══ */}
-        <rect x="65" y="169" width="50" height="5.5" rx="2.75" fill="#235f80"/>
-        <circle cx="65"  cy="171.5" r="3.5" fill="#194a60"/>
-        <circle cx="115" cy="171.5" r="3.5" fill="#194a60"/>
-        <line x1="90" y1="175" x2="90" y2="182" stroke="#235f80" strokeWidth="2.5" strokeLinecap="round"/>
+      {/* Bottom fade — przejście w fale */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(to top, #07162a 0%, rgba(7,22,42,0.80) 16%, rgba(7,22,42,0.3) 36%, transparent 58%)',
+      }} />
 
-        {/* ══ HEAD ══ */}
-        <circle cx="24" cy="121" r="15" fill="#0c2448"/>
-        <ellipse cx="27" cy="126" rx="11.5" ry="11" fill="#c8895a"/>
-        <path d="M12,118 Q22,110 38,115" stroke="#0c2448" strokeWidth="5.5" fill="none" strokeLinecap="round"/>
-        {/* Goggles */}
-        <rect x="16" y="120" width="23" height="8.5" rx="4.25" fill="rgba(4,10,40,0.90)"/>
-        <ellipse cx="21.5" cy="124" rx="5" ry="4" fill="rgba(0,155,220,0.28)"/>
-        <ellipse cx="33.5" cy="124" rx="5" ry="4" fill="rgba(0,155,220,0.28)"/>
-        <path d="M17,121 Q20,119 24,121" stroke="rgba(200,242,255,0.65)" strokeWidth="1.1" fill="none"/>
-        <path d="M16,126 Q22,136 27,138 Q34,136 38,128" stroke="#0c2448" strokeWidth="1.8" fill="none" opacity="0.6"/>
+      {/* Top vignette */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(to bottom, rgba(7,22,42,0.55) 0%, transparent 20%)',
+      }} />
 
-        {/* ══ TORSO — ocean-blue wetsuit ══ */}
-        {/* Drop shadow layer */}
-        <path d="M40,137 Q66,155 100,183" stroke="rgba(0,20,60,0.70)" strokeWidth="19" strokeLinecap="round"/>
-        {/* Main body — medium ocean blue */}
-        <path d="M40,137 Q66,155 100,183" stroke="#1a6ba0" strokeWidth="14" strokeLinecap="round"/>
-        {/* Highlight sheen */}
-        <path d="M43,140 Q65,156 96,182" stroke="#2e90c6" strokeWidth="5" strokeLinecap="round" opacity="0.55"/>
-        {/* Chest panel */}
-        <path d="M46,143 Q62,152 82,163" stroke="#15558a" strokeWidth="11" strokeLinecap="round"/>
-        <path d="M49,145 Q62,153 80,163" stroke="#2282ba" strokeWidth="4" strokeLinecap="round" opacity="0.45"/>
-
-        {/* ── Harness — orange ── */}
-        <path d="M50,158 Q72,168 96,180" stroke="#ff6b35" strokeWidth="7.5" strokeLinecap="round" opacity="0.93"/>
-        <path d="M52,158 Q74,168 97,180" stroke="rgba(255,170,80,0.60)" strokeWidth="2.8" strokeLinecap="round"/>
-        <circle cx="74" cy="164" r="4.2" fill="#cc4a10" opacity="0.90"/>
-        <circle cx="74" cy="164" r="2.1" fill="rgba(255,205,100,0.80)"/>
-
-        {/* ══ ARMS ══ */}
-        <path d="M42,141 Q56,152 72,172" stroke="rgba(0,20,60,0.60)" strokeWidth="8" strokeLinecap="round"/>
-        <path d="M50,148 Q82,163 116,172" stroke="rgba(0,20,60,0.60)" strokeWidth="7.5" strokeLinecap="round"/>
-        <path d="M42,141 Q56,152 72,172" stroke="#1a6ba0" strokeWidth="5.5" strokeLinecap="round"/>
-        <path d="M50,148 Q82,163 116,172" stroke="#1a6ba0" strokeWidth="5" strokeLinecap="round"/>
-        <ellipse cx="72"  cy="173" rx="5.5" ry="4.2" fill="#07192e"/>
-        <ellipse cx="116" cy="172" rx="5.5" ry="4.2" fill="#07192e"/>
-
-        {/* ══ LEGS ══ */}
-        <path d="M99,184 Q113,210 125,233" stroke="rgba(0,20,60,0.60)" strokeWidth="10" strokeLinecap="round"/>
-        <path d="M107,189 Q122,217 148,236" stroke="rgba(0,20,60,0.60)" strokeWidth="9.5" strokeLinecap="round"/>
-        <path d="M99,184 Q113,210 125,233" stroke="#1a6ba0" strokeWidth="7" strokeLinecap="round"/>
-        <path d="M107,189 Q122,217 148,236" stroke="#1a6ba0" strokeWidth="6.5" strokeLinecap="round"/>
-        <ellipse cx="125" cy="234" rx="9.5" ry="4.8" fill="#050e1e" transform="rotate(-4,125,234)"/>
-        <ellipse cx="149" cy="237" rx="10" ry="4.2" fill="#050e1e" transform="rotate(-4,149,237)"/>
-
-        {/* ══ BOARD ══ */}
-        <ellipse cx="140" cy="247" rx="50" ry="6.5" fill="rgba(0,0,0,0.28)"/>
-        <path d="M97,239 Q100,232 118,231 Q140,230 162,231 Q180,232 183,239 Q180,246 162,247 Q140,248 118,247 Q100,246 97,239Z"
-          fill="#cde8f8" opacity="0.97"/>
-        <path d="M101,238 Q106,233 120,232 Q140,231 160,232 Q176,233 179,238 Q176,244 160,245 Q140,246 120,245 Q106,244 101,238Z"
-          fill="#eaf5ff" opacity="0.68"/>
-        <line x1="118" y1="233" x2="162" y2="233" stroke="#00b8e8" strokeWidth="2.2" opacity="0.65"/>
-        <rect x="117" y="232" width="15" height="9" rx="3" fill="rgba(0,70,155,0.50)"/>
-        <rect x="148" y="231" width="15" height="9" rx="3" fill="rgba(0,70,155,0.50)"/>
-        <path d="M117,231 Q124,229 132,231" stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" fill="none"/>
-        <path d="M148,231 Q155,229 163,231" stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" fill="none"/>
-        <path d="M106,241 L100,259 L114,241Z" fill="rgba(0,130,200,0.62)"/>
-        <path d="M175,239 L181,257 L168,239Z" fill="rgba(0,130,200,0.58)"/>
-
-        {/* ══ WATER SPRAY & WAKE ══ */}
-        {/* Wake foam arc */}
-        <path d="M88,250 C112,262 168,262 192,250"
-          stroke="rgba(0,210,255,0.20)" strokeWidth="3" fill="none" strokeLinecap="round"/>
-        {/* Left spray arc */}
-        <path d="M94,253 Q98,244 107,255"
-          stroke="rgba(180,235,255,0.62)" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
-        {/* Right spray arc */}
-        <path d="M170,251 Q176,242 182,253"
-          stroke="rgba(180,235,255,0.62)" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
-        {/* Spray droplets */}
-        <circle cx="87"  cy="261" r="2.2" fill="rgba(160,225,255,0.44)"/>
-        <circle cx="99"  cy="269" r="1.5" fill="rgba(160,225,255,0.32)"/>
-        <circle cx="138" cy="265" r="1.2" fill="rgba(160,225,255,0.26)"/>
-        <circle cx="186" cy="260" r="2.0" fill="rgba(160,225,255,0.44)"/>
-        <circle cx="177" cy="267" r="1.5" fill="rgba(160,225,255,0.30)"/>
-      </motion.svg>
+      {/* Subtelny cyan color-grade */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(145deg, transparent 40%, rgba(0,100,200,0.10) 100%)',
+        mixBlendMode: 'screen',
+      }} />
     </motion.div>
   )
 }
@@ -180,8 +112,8 @@ export default function Hero() {
         background:'radial-gradient(circle, rgba(6,214,247,0.11) 0%, transparent 65%)',
         bottom:-100, right:-120, animation:'orb2 18s ease-in-out infinite' }} />
 
-      {/* ── Kitesurfer ── */}
-      <KitesurferSVG />
+      {/* ── Hero photo ── */}
+      <HeroPhoto />
 
       {/* ── Main content ── */}
       <div style={{
@@ -362,6 +294,7 @@ export default function Hero() {
           .hero-text-wrap { max-width: 100%; text-align: center; }
           .hero-text-wrap > div { justify-content: center; }
           .hero-text-wrap p { margin-left: auto; margin-right: auto; }
+          .hero-photo { display: none; }
         }
         @media (max-width: 680px) {
           .hero-text-wrap h1 { font-size: clamp(52px, 14vw, 80px) !important; }
