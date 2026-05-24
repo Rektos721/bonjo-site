@@ -18,7 +18,7 @@ const PLANS = [
     subtitle: 'Pierwsze kroki bez ryzyka',
     price: '0',
     currency: 'zł',
-    per: 'za darmo',
+    per: 'całkowicie za darmo',
     badge: 'GRATIS',
     featured: false,
     features: [
@@ -34,32 +34,32 @@ const PLANS = [
   {
     name: 'KITE START',
     subtitle: 'Kompleksowy kurs grupowy',
-    price: '★',
-    currency: '',
-    per: 'Zapytaj o cenę',
+    price: '599',
+    currency: 'zł',
+    per: 'sprzęt w cenie · max 4 os.',
     badge: 'GRUPOWY',
     featured: false,
     features: [
-      'Kilka dni szkolenia',
+      '3 godziny szkolenia',
       'Teoria wiatru, morza i latawców',
       'Ćwiczenia na lądzie i wodzie',
       'Wodny start krok po kroku',
       'Certyfikowany instruktor IKO',
       'Sprzęt Duotone / Airush w cenie',
     ],
-    cta: 'Zapytaj o termin',
+    cta: 'Zapisz się',
     ctaHref: '#contact',
   },
   {
     name: 'KITE START PRO',
     subtitle: 'Kurs z certyfikatem IKO',
-    price: '★',
-    currency: '',
-    per: 'Zapytaj o cenę',
+    price: '1 099',
+    currency: 'zł',
+    per: 'z certyfikatem IKO Level 1',
     badge: 'POLECANY',
     featured: true,
     features: [
-      '5 godzin szkolenia',
+      '5 godzin szkolenia (3h + 2h)',
       'Pełny program Kite Start',
       'Certyfikat IKO Level 1',
       'Uznawany przez szkoły na świecie',
@@ -74,9 +74,9 @@ const PLANS = [
   {
     name: 'PRIVATE',
     subtitle: 'Lekcja jeden na jeden',
-    price: '★',
-    currency: '',
-    per: 'Zapytaj o cenę',
+    price: '350',
+    currency: 'zł/h',
+    per: 'instruktor wyłącznie dla Ciebie',
     badge: null,
     featured: false,
     features: [
@@ -183,10 +183,23 @@ export default function Pricing() {
                     GRATIS
                   </div>
                 ) : (
-                  <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.5 }}>
-                    <span style={{ fontSize: '1.4rem', color: 'var(--accent-cyan)' }}>✦</span>
-                    <br />
-                    <span style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{plan.per}</span>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
+                      <span className="display" style={{
+                        fontWeight: 900,
+                        fontSize: plan.currency === 'zł/h' ? '2.4rem' : '2.8rem',
+                        color: plan.featured ? 'var(--accent-cyan)' : 'var(--text-primary)',
+                        lineHeight: 1,
+                      }}>
+                        {plan.price}
+                      </span>
+                      <span style={{ fontSize: '1rem', color: 'var(--text-muted)', fontWeight: 500 }}>
+                        {plan.currency}
+                      </span>
+                    </div>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: 6, lineHeight: 1.4 }}>
+                      {plan.per}
+                    </div>
                   </div>
                 )}
               </div>

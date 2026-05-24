@@ -182,21 +182,12 @@ export default function Contact() {
                   Pierwsza lekcja intro — gratis, bez zobowiązań.
                 </p>
 
-                <div className="grid sm:grid-cols-2 gap-4" style={{ marginBottom:16 }}>
-                  <div>
-                    <label style={lbl}>Imię i nazwisko</label>
-                    <input type="text" placeholder="Jan Kowalski" required
-                      className="contact-inp"
-                      style={focusStyle('name')}
-                      onFocus={()=>setFocused('name')} onBlur={()=>setFocused(null)}/>
-                  </div>
-                  <div>
-                    <label style={lbl}>Telefon / WhatsApp</label>
-                    <input type="tel" placeholder="+48 600 000 000"
-                      className="contact-inp"
-                      style={focusStyle('phone')}
-                      onFocus={()=>setFocused('phone')} onBlur={()=>setFocused(null)}/>
-                  </div>
+                <div style={{ marginBottom:16 }}>
+                  <label style={lbl}>Imię i nazwisko</label>
+                  <input type="text" placeholder="Jan Kowalski" required
+                    className="contact-inp"
+                    style={focusStyle('name')}
+                    onFocus={()=>setFocused('name')} onBlur={()=>setFocused(null)}/>
                 </div>
 
                 <div style={{ marginBottom:16 }}>
@@ -208,30 +199,16 @@ export default function Contact() {
                 </div>
 
                 <div style={{ marginBottom:16 }}>
-                  <label style={lbl}>Interesuje mnie</label>
-                  <select className="contact-inp"
-                    style={focusStyle('service')}
-                    onFocus={()=>setFocused('service')} onBlur={()=>setFocused(null)}>
-                    <option value="">Wybierz opcję...</option>
-                    {SELECT_OPTIONS.map(o=><option key={o} value={o}>{o}</option>)}
-                  </select>
-                </div>
-
-                <div style={{ marginBottom:16 }}>
-                  <label style={lbl}>Lokalizacja</label>
-                  <select className="contact-inp"
-                    style={focusStyle('loc')}
-                    onFocus={()=>setFocused('loc')} onBlur={()=>setFocused(null)}>
-                    <option value="">Gdzie chcesz się uczyć?</option>
-                    <option>Jastarnia (sezon letni)</option>
-                    <option>El Médano, Tenerife (zima)</option>
-                    <option>Bez preferencji</option>
-                  </select>
+                  <label style={lbl}>Telefon / WhatsApp <span style={{ opacity:0.5, fontWeight:400 }}>(opcjonalnie)</span></label>
+                  <input type="tel" placeholder="+48 600 000 000"
+                    className="contact-inp"
+                    style={focusStyle('phone')}
+                    onFocus={()=>setFocused('phone')} onBlur={()=>setFocused(null)}/>
                 </div>
 
                 <div style={{ marginBottom:24 }}>
                   <label style={lbl}>Wiadomość</label>
-                  <textarea rows={3} placeholder="Twój poziom, preferowane terminy, pytania..."
+                  <textarea rows={4} placeholder="Twój poziom, preferowane terminy, pytania..."
                     className="contact-inp"
                     style={{ ...focusStyle('msg'), resize:'none' }}
                     onFocus={()=>setFocused('msg')} onBlur={()=>setFocused(null)}/>

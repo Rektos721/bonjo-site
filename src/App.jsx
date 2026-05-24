@@ -1,17 +1,19 @@
-import Nav        from './components/Nav'
-import Hero       from './components/Hero'
-import TrustBar   from './components/TrustBar'
-import HowItWorks from './components/HowItWorks'
-import About      from './components/About'
-import Locations  from './components/Locations'
-import Courses    from './components/Courses'
-import Gallery    from './components/Gallery'
-import Reviews    from './components/Reviews'
-import Pricing    from './components/Pricing'
-import FAQ        from './components/FAQ'
-import FinalCTA   from './components/FinalCTA'
-import Contact    from './components/Contact'
-import Footer     from './components/Footer'
+import Nav            from './components/Nav'
+import Hero           from './components/Hero'
+import TrustBar       from './components/TrustBar'
+import HowItWorks     from './components/HowItWorks'
+import About          from './components/About'
+import Instructors    from './components/Instructors'
+import Locations      from './components/Locations'
+import Courses        from './components/Courses'
+import Gallery        from './components/Gallery'
+import Reviews        from './components/Reviews'
+import Pricing        from './components/Pricing'
+import FAQ            from './components/FAQ'
+import FinalCTA       from './components/FinalCTA'
+import Contact        from './components/Contact'
+import Footer         from './components/Footer'
+import WhatsAppButton from './components/WhatsAppButton'
 
 /**
  * GlobalClouds — 7 distinct cloud formations drifting linearly across the sky.
@@ -76,6 +78,7 @@ export default function App() {
       <TrustBar />
       <HowItWorks />
       <About />
+      <Instructors />
       <Locations />
       <Courses />
       <Gallery />
@@ -85,6 +88,7 @@ export default function App() {
       <FinalCTA />
       <Contact />
       <Footer />
+      <WhatsAppButton />
     </>
   )
 }
