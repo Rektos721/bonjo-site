@@ -165,7 +165,17 @@ export default function Contact() {
 
             {sent ? (
               <div style={{ textAlign:'center', padding:'52px 0' }}>
-                <div style={{ fontSize:'3.5rem', marginBottom:16 }}>🪁</div>
+                <div style={{ marginBottom:16, display:'flex', justifyContent:'center' }}>
+                  <svg width="56" height="56" viewBox="0 0 56 56" fill="none" style={{ color:'var(--accent-cyan)' }}>
+                    <circle cx="28" cy="28" r="26" stroke="currentColor" strokeWidth="1.8" strokeOpacity="0.35"/>
+                    <circle cx="28" cy="28" r="26" stroke="currentColor" strokeWidth="1.8" strokeDasharray="163" strokeDashoffset="163" style={{ animation:'dash-in 0.6s 0.1s ease forwards', transformOrigin:'center', transform:'rotate(-90deg)' }}/>
+                    <polyline points="18,28 25,35 38,21" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" fill="none" style={{ animation:'fade-check 0.3s 0.55s ease forwards', opacity:0 }}/>
+                  </svg>
+                </div>
+                <style>{`
+                  @keyframes dash-in { to { stroke-dashoffset: 0; } }
+                  @keyframes fade-check { to { opacity: 1; } }
+                `}</style>
                 <h3 className="display" style={{ fontWeight:800, fontSize:'2rem', color:'var(--accent-cyan)', marginBottom:10 }}>
                   Gotowe!
                 </h3>

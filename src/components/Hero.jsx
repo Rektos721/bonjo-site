@@ -1,5 +1,35 @@
 import { motion } from 'framer-motion'
 
+/* ── Sky cloud — radial-gradient only, zero filter:blur, zero gray halo ── */
+function SkyCloud({ top, left, w, h, op, anim, dur, del }) {
+  const o  = op
+  const o2 = +(op * 0.55).toFixed(2)
+  const o3 = +(op * 0.20).toFixed(2)
+  const o4 = +(op * 0.75).toFixed(2)
+  const o5 = +(op * 0.33).toFixed(2)
+  const o6 = +(op * 0.58).toFixed(2)
+  const o7 = +(op * 0.18).toFixed(2)
+  return (
+    <div style={{
+      position: 'absolute', top, left, width: w, height: h,
+      pointerEvents: 'none',
+      animation: `${anim} ${dur} ease-in-out infinite ${del}`,
+      willChange: 'transform',
+      mixBlendMode: 'screen',
+    }}>
+      {/* Base body */}
+      <div style={{ position: 'absolute', inset: 0,
+        background: `radial-gradient(ellipse at 42% 60%, rgba(255,255,255,${o}) 0%, rgba(240,249,255,${o2}) 30%, rgba(220,242,255,${o3}) 58%, transparent 72%)` }} />
+      {/* Upper dome */}
+      <div style={{ position: 'absolute', width: '50%', height: '115%', left: '15%', top: '-38%',
+        background: `radial-gradient(ellipse at 50% 58%, rgba(255,255,255,${o4}) 0%, rgba(240,249,255,${o5}) 40%, transparent 64%)` }} />
+      {/* Right lobe */}
+      <div style={{ position: 'absolute', width: '62%', height: '52%', left: '50%', top: '20%',
+        background: `radial-gradient(ellipse at 38% 50%, rgba(255,255,255,${o6}) 0%, rgba(240,249,255,${o7}) 40%, transparent 62%)` }} />
+    </div>
+  )
+}
+
 /* ── Hero photo — right-side, dissolves via CSS mask (true transparency) ── */
 function HeroPhoto() {
   // mask-image = prawdziwa przezroczystość, zero color mismatch z tłem
@@ -111,6 +141,19 @@ export default function Hero() {
         bottom:-80, right:-100,
       }} />
 
+      {/* ── Chmury — inside hero, clip by overflow:hidden, before photo so photo paints on top ── */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
+        <SkyCloud top="2%"  left="1%"  w={620} h={145} op={0.52} anim="drift-a" dur="22s" del="0s" />
+        <SkyCloud top="5%"  left="38%" w={480} h={118} op={0.48} anim="drift-b" dur="28s" del="-9s" />
+        <SkyCloud top="0%"  left="66%" w={540} h={130} op={0.50} anim="drift-c" dur="20s" del="-5s" />
+        <SkyCloud top="12%" left="12%" w={400} h={100} op={0.46} anim="drift-d" dur="25s" del="-14s" />
+        <SkyCloud top="14%" left="56%" w={520} h={124} op={0.48} anim="drift-a" dur="30s" del="-7s" />
+        <SkyCloud top="8%"  left="78%" w={340} h={88}  op={0.44} anim="drift-b" dur="18s" del="-12s" />
+        <SkyCloud top="22%" left="4%"  w={580} h={138} op={0.46} anim="drift-c" dur="24s" del="-18s" />
+        <SkyCloud top="25%" left="44%" w={440} h={108} op={0.44} anim="drift-d" dur="27s" del="-4s" />
+        <SkyCloud top="20%" left="72%" w={460} h={112} op={0.45} anim="drift-a" dur="22s" del="-10s" />
+      </div>
+
       {/* ── Hero photo ── */}
       <HeroPhoto />
 
@@ -187,9 +230,10 @@ export default function Hero() {
               href="https://www.windfinder.com/forecast/hel"
               target="_blank" rel="noopener noreferrer"
               className="btn-outline"
-              style={{ fontSize:'0.92rem', padding:'14px 24px', opacity:0.82 }}
+              style={{ fontSize:'0.92rem', padding:'14px 24px', opacity:0.82, display:'inline-flex', alignItems:'center', gap:7 }}
             >
-              🌬 Sprawdź wiatr
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" style={{ flexShrink:0 }}><path d="M9.59 4.59A2 2 0 1 1 11 8H2"/><path d="M11.41 19.41A2 2 0 1 0 14 16H2"/><path d="M15.73 7.73A2.5 2.5 0 1 1 19.5 12H2"/></svg>
+              Sprawdź wiatr
             </a>
           </motion.div>
 

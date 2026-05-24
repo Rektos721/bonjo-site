@@ -176,7 +176,7 @@ export default function Instructors() {
                   <div style={{ width:1, background:'rgba(255,255,255,0.07)', margin:'0 18px' }}/>
                   <div style={{ flex:1 }}>
                     <div style={{ fontSize:'0.8rem', color:'var(--text-primary)', fontWeight:600, lineHeight:1.3 }}>
-                      📍 {inst.spot}
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" style={{ flexShrink:0, display:'inline-block', verticalAlign:'middle', marginRight:4, marginBottom:1 }}><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>{inst.spot}
                     </div>
                     <div style={{ fontSize:'0.6rem', color:'var(--text-muted)', textTransform:'uppercase', letterSpacing:'0.1em', marginTop:4 }}>
                       Spot

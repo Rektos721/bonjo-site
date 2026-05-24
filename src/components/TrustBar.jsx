@@ -1,10 +1,37 @@
 import { motion } from 'framer-motion'
 
+const IcoShield = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    <polyline points="9 12 11 14 15 10"/>
+  </svg>
+)
+const IcoUsers = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+    <circle cx="9" cy="7" r="4"/>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+  </svg>
+)
+const IcoStar = () => (
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+  </svg>
+)
+const IcoKite = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2 L22 12 L12 22 L2 12 Z"/>
+    <line x1="12" y1="7" x2="12" y2="17"/>
+    <line x1="7" y1="12" x2="17" y2="12"/>
+  </svg>
+)
+
 const ITEMS = [
-  { icon: '🏅', label: 'IKO Certified', sub: 'Oficjalna szkoła' },
-  { icon: '🏄', label: '500+ kursantów', sub: 'Sezony 2019–2026' },
-  { icon: '⭐', label: '5.0 Google', sub: '48 opinii' },
-  { icon: '🪁', label: 'Duotone & Airush', sub: 'Sprzęt premium' },
+  { Icon: IcoShield, label: 'IKO Certified',    sub: 'Oficjalna szkoła' },
+  { Icon: IcoUsers,  label: '500+ kursantów',   sub: 'Sezony 2019–2026' },
+  { Icon: IcoStar,   label: '5.0 Google',       sub: '48 opinii' },
+  { Icon: IcoKite,   label: 'Duotone & Airush', sub: 'Sprzęt premium' },
 ]
 
 export default function TrustBar() {
@@ -38,7 +65,9 @@ export default function TrustBar() {
               }} />
             )}
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
-              <span style={{ fontSize: '1.22rem', lineHeight: 1 }}>{item.icon}</span>
+              <span style={{ color: 'rgba(240,250,255,0.75)', lineHeight: 1, display: 'flex' }}>
+                <item.Icon />
+              </span>
               <div>
                 <div style={{
                   fontSize: '0.8rem', fontWeight: 600,
