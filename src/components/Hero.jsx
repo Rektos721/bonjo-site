@@ -146,81 +146,92 @@ export default function Hero() {
         position: 'relative', zIndex: 2,
         width: '100%', maxWidth: 1280,
         margin: '0 auto',
-        padding: '120px 24px 220px',
+        padding: 'clamp(80px,12vh,140px) 24px 240px',
       }}>
-        {/* Constrain text to left ~55% */}
         <div className="hero-text-wrap">
 
-          {/* Tag row */}
+          {/* Credential pill — tiny, above headline */}
           <motion.div
-            initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }}
-            transition={{ duration:0.6, delay:0.15 }}
-            style={{ display:'flex', alignItems:'center', gap:12, marginBottom:28, flexWrap:'wrap' }}
+            initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }}
+            transition={{ duration:0.5, delay:0.1 }}
+            style={{ marginBottom:24 }}
           >
-            <span className="section-tag">Szkoła Kitesurfingu</span>
             <span className="mono" style={{
-              background:'rgba(6,214,247,0.1)', border:'1px solid rgba(6,214,247,0.28)',
-              color:'var(--accent-cyan)', fontSize:'0.62rem', letterSpacing:'0.15em',
-              padding:'4px 12px', borderRadius:20,
-            }}>IKO CERTIFIED</span>
+              background:'rgba(0,216,255,0.08)',
+              border:'1px solid rgba(0,216,255,0.22)',
+              color:'rgba(0,216,255,0.85)',
+              fontSize:'0.6rem', letterSpacing:'0.2em',
+              padding:'5px 14px', borderRadius:20,
+            }}>
+              ✦ CERTYFIKOWANA SZKOŁA IKO
+            </span>
           </motion.div>
 
-          {/* Headline */}
+          {/* HEADLINE — emotional, max impact */}
           <motion.h1
             className="display"
-            initial={{ opacity:0, y:50 }} animate={{ opacity:1, y:0 }}
-            transition={{ duration:1, delay:0.28, ease:[0.16,1,0.3,1] }}
+            initial={{ opacity:0, y:56 }} animate={{ opacity:1, y:0 }}
+            transition={{ duration:1.05, delay:0.22, ease:[0.16,1,0.3,1] }}
             style={{
               fontWeight: 900,
-              fontSize: 'clamp(58px,8.5vw,116px)',
-              lineHeight: 0.9,
-              letterSpacing: '-0.038em',
+              fontSize: 'clamp(64px,9.5vw,124px)',
+              lineHeight: 0.88,
+              letterSpacing: '-0.04em',
               color: 'var(--text-primary)',
-              marginBottom: 28,
+              marginBottom: 24,
             }}
           >
-            Poczuj<br />
-            <span style={{ color:'var(--accent-cyan)' }}>wolność.</span>
+            Poczuj wiatr.<br />
+            <span style={{ color:'var(--accent-cyan)' }}>Opanuj wodę.</span>
           </motion.h1>
 
-          {/* Sub */}
+          {/* SUBHEADLINE — 1 line only */}
           <motion.p
-            initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }}
-            transition={{ duration:0.7, delay:0.55 }}
+            initial={{ opacity:0, y:14 }} animate={{ opacity:1, y:0 }}
+            transition={{ duration:0.65, delay:0.52 }}
             style={{
               color: 'var(--text-muted)',
-              fontSize: 'clamp(15px,1.35vw,18px)',
-              lineHeight: 1.72,
-              maxWidth: 420,
+              fontSize: 'clamp(15px,1.25vw,17px)',
+              lineHeight: 1.5,
               marginBottom: 44,
-              fontWeight: 300,
+              fontWeight: 400,
+              letterSpacing: '0.01em',
             }}
           >
-            Certyfikowane kursy kitesurfingu IKO — latem w{' '}
-            <span style={{ color:'var(--text-primary)', fontWeight:500 }}>Jastarni</span>,
-            zimą na{' '}
-            <span style={{ color:'var(--text-primary)', fontWeight:500 }}>Teneryfie</span>.
-            Pierwsza lekcja{' '}
-            <span style={{ color:'var(--accent-cyan)', fontWeight:600 }}>za darmo</span>.
+            Certyfikowani instruktorzy IKO · Jastarnia & Tenerife · Pierwsza lekcja gratis
           </motion.p>
 
-          {/* CTAs */}
+          {/* CTA ROW */}
           <motion.div
-            initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }}
-            transition={{ duration:0.7, delay:0.7 }}
-            style={{ display:'flex', gap:14, flexWrap:'wrap' }}
+            initial={{ opacity:0, y:14 }} animate={{ opacity:1, y:0 }}
+            transition={{ duration:0.65, delay:0.68 }}
+            style={{ display:'flex', alignItems:'center', gap:16, flexWrap:'wrap' }}
           >
-            <a href="#contact" className="btn-primary" style={{ fontSize:'1rem', padding:'16px 36px' }}>
+            {/* PRIMARY — dominant */}
+            <a href="#contact" className="btn-hero-primary">
               Zarezerwuj lekcję →
             </a>
+            {/* SECONDARY — lower weight */}
             <a
               href="https://www.windfinder.com/forecast/hel"
               target="_blank" rel="noopener noreferrer"
               className="btn-outline"
-              style={{ fontSize:'1rem', padding:'15px 28px' }}
+              style={{ fontSize:'0.92rem', padding:'14px 24px', opacity:0.82 }}
             >
-              🌬 Warunki wietrzne
+              🌬 Sprawdź wiatr
             </a>
+          </motion.div>
+
+          {/* Social proof micro-line — below CTAs */}
+          <motion.div
+            initial={{ opacity:0 }} animate={{ opacity:1 }}
+            transition={{ duration:0.6, delay:0.95 }}
+            style={{ display:'flex', alignItems:'center', gap:8, marginTop:26, flexWrap:'wrap' }}
+          >
+            <span style={{ color:'var(--accent-gold)', fontSize:'0.85rem', letterSpacing:'2px' }}>★★★★★</span>
+            <span style={{ color:'rgba(140,185,215,0.55)', fontSize:'0.73rem' }}>
+              5.0 · 48 opinii Google · Sprzęt Duotone & Airush w cenie
+            </span>
           </motion.div>
 
         </div>
@@ -284,20 +295,23 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Responsive text alignment */}
       <style>{`
-        .hero-text-wrap { max-width: 560px; }
+        .hero-text-wrap { max-width: 580px; }
+
         @media (max-width: 860px) {
           .hero-text-wrap {
             max-width: 100%;
             text-align: center;
           }
-          .hero-text-wrap .section-tag,
-          .hero-text-wrap > div:first-child {
-            justify-content: center;
-          }
+          .hero-text-wrap > div { justify-content: center; }
           .hero-text-wrap p { margin-left: auto; margin-right: auto; }
-          .hero-text-wrap > div:last-child { justify-content: center; }
+        }
+
+        /* Ensure surfer doesn't overlap text on medium screens */
+        @media (max-width: 680px) {
+          .hero-text-wrap h1 {
+            font-size: clamp(52px, 14vw, 80px) !important;
+          }
         }
       `}</style>
     </section>
